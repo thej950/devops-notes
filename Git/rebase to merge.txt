@@ -1,8 +1,0 @@
-rebase --git--3rd session-time 14:00 min
----------
-1.rebase command used to merge with master branch in ordered to fast forward way
-2.it will copy commits into master branch as a latest commits 
-3.ordered perform this command 
-	--> $ git rebase master --- at child branch level
-	--> $ git checkout master
-	--> $ git merge childbranchname --- at master branch level

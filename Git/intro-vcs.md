@@ -1,33 +1,29 @@
-Version Controlling
-=======================
-This is the process of maintianing multiple versions of the code
-All the team members uplaod their code(check in) into the remote
-version controlling system.The VCS accepts the code uplaods from 
-multiple team members and integrates it so that when the other
-team members download the code they will be able to see the entire
-work donw by the team
+# 🟦 Version Controlling (Simple Explanation)
 
-VCS's also preserve older and later versions of the code so that
-at any time we can switch between which ever version we want
+* Version Control is the **process of maintaining multiple versions of the code**.
+* All team members **upload (check-in)** their code into a central server called a **VCS**.
+* The VCS automatically **integrates everyone’s work**, so when someone downloads, they see the **full team’s code**.
+* It also keeps **old versions**, so we can switch to any version anytime.
+* VCS also tracks **who made what change**.
 
-VCS's also keep a track of who is making what kind of changes
+---
 
-======================================================================
+# 🟦 Types of Version Control Systems
 
-VCS's are categorised into 2 types
-1 Centralised version controlling
-2 Distributed version controlling
+## 1️⃣ **Centralized Version Control**
 
-Centralised Version controlling
------------------------------------
-Here we have a remote server(code repository) into which all the team 
-members check in the code and all the features of version controlling
-are implemented in this remote server
+* Single **central server** stores all the code.
+* Team members **check-in** and **check-out** from that one server.
+* Version control happens **only in the remote server**.
+* Examples: **SVN, CVS**
 
- Distributed version controlling
--------------------------------------
-Here we have a local repository installed on every team members machines
-where version controlling happens at the level of individual team members
-form where it is uploaded into a remote server where version cotrolling 
-happens for the entire team
+---
 
+## 2️⃣ **Distributed Version Control**
+
+* Every developer has a **local repository** on their own machine.
+* Version control happens **locally first**, then code is pushed to remote.
+* Both **local** and **remote** have full version history.
+* Examples: **Git, Mercurial**
+
+---
