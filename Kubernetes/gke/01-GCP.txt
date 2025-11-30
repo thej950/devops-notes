@@ -1,0 +1,52 @@
+Create a VM on GCP
+----------------------
+1. Enable Compute Engine API 
+2. Create VM 
+
+	Machine Configurations
+	OS and Storage
+	Data Protection
+	Networking
+	Observability
+	Security
+	Advanced
+
+	Compute Engine->VM Instances->click on create Instance->
+		Name: Jenkins-machine
+		Labels: N/A
+		Region: (Go with Defaults)
+		Machine configuration: Go with General Purpose 
+			Series: Ec2
+			Machine type: ec2-micro, 2CPU, 1GB RAM
+		Confidential VM server: N/A
+		Container: N/A
+		Boot disk:  (Go with default)
+		Identity and API access: (Go with Default)
+		Access Scopes: (Allow Default Access)
+		Firewall: (Based usage set required details )
+		
+		- any Additional Info Go with Default 
+	
+3. Connect to VM 
+	- It will provide to connect machine in Broser only find in Details SSH 
+	- there also another way to connect machine throgh gcloud (gcloud) | it will provide a command to connect 
+		- first install gcloud cli tool into local machine 
+		- perform gcloud login into API 
+		- than paste that command into gcloud terminal to access machine 
+===========================
+Create GKE cluster and Deploy container from GCR 
+1. Create GKE cluster with standard 
+	Name : Hello-Cluster
+	
+	
+===================================
+Create GCR and Upload Images into GCR 
+
+Goto Container Registry (GCR)
+	
+	# docker build -t gcr.io/<project-id>/myimage:tag    ----> docker build -t gcr.io/cloud-sql-300902/hello-nodejs:thej .
+	
+	# docker images 
+	
+	# docker push gcr.io/<project-id>/myimage:tag  ----> docker push gcr.io/cloud-sql-300902/hello-nodejs:thej 
+	
