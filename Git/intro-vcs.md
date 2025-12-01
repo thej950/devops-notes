@@ -27,3 +27,27 @@
 * Examples: **Git, Mercurial**
 
 ---
+
+# Q: what is git
+- Git is a version control system (VCS) — a tool that helps you track changes in your source code over time. It lets multiple developers collaborate on a project without overwriting each other’s work.
+- Think of it like a “time machine” for your code — you can go back to any previous version whenever you need.
+
+# 🔹 Why Git?
+
+✅ Tracks every change made in the code
+✅ Allows collaboration among team members
+✅ Lets you revert to previous versions (undo mistakes easily)
+✅ Works both online (with GitHub/GitLab/Bitbucket) and offline (locally on your machine)
+✅ Helps manage different branches of code for features, testing, and releases
+
+
+
+# 🔹 How Git Works (in short)
+- Repository (repo) — The project folder that Git tracks.
+- Commit — A snapshot of your changes.
+- Branch — A separate line of development.
+- Merge — Combines changes from different branches.
+- Remote — A version of your repository hosted online (e.g., on GitHub).
+- Clone / Pull / Push — Commands to get or send code between local and remote repositories.
+
+
