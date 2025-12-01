@@ -15,7 +15,13 @@
 - [squash](./squash.md)
 - [gitignore](./gitignore.md)
 - [merge and merge conflicts](./Git%20Merge%20and%20merge%20conflicts)
-
+- [Git Aliases](./aliases.md)
+- [Git Revert](./revert.md)
+- [Git Branching](./branching.md)
+- [Git Configurations](./git-configurations.md)
+- [Git Restore](./restore.md)
+- [rename file using git mv](./file-rename-using-mv-command.md)  
+- [Git Features](./features.md)
 
 
 
