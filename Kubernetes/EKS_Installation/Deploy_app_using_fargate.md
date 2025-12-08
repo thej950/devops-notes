@@ -1,5 +1,4 @@
-Deploy an Application in Fargate cluster And Access From Browser
------------------------------------------------------------------
+# Deploy an Application in Fargate cluster And Access From Browser
 
 # step1: create eks fargate cluster as name thej-cluster in us-east-1 region  
 
