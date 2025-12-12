@@ -1,0 +1,424 @@
+## 1. List Resources
+
+```
+k get all            	            # List all major resources in the current namespace
+k get all -A                      # List all resources across ALL namespaces
+k get <resource>                  # List a specific resource type (pods, svc, deploy, rs, etc.)
+k get <resource> -o wide          # List resources with more details (IP, Node, etc.)
+```
+
+
+## 2. Inspect Resource Details
+
+```
+k describe <resource> <name>      # Show detailed information about a specific resource
+```
+
+## 3. Logs (Pod Logs)
+
+```
+k logs <pod-name>                 # View logs of the Pod
+k logs -f <pod-name>              # Follow (live stream) Pod logs in real-time
+```
+
+## 4. Execute Inside Pod
+
+```
+k exec -it <pod-name> -- sh       # Open an interactive shell inside a Pod's container
+```
+
+## 5. Create / Apply / Edit Resources
+
+```
+k apply -f <file.yaml>            # Apply configuration (create or update) from YAML
+k create -f <file.yaml>           # Create a resource from a YAML file
+k edit <resource> <name>          # Edit the live configuration of a running resource
+```
+
+## 6. Delete Resources
+
+```
+k delete <resource> <name>        # Delete resource by type and name
+```
+
+## 7. Resource Usage (Metrics)
+
+```
+k top pod                         # Show CPU/Memory usage of Pods
+k top node                        # Show CPU/Memory usage of Nodes
+```
+
+## List Deployments
+
+```
+k get deploy                                        # List all Deployments
+```
+
+## Rollout (Deployment lifecycle)
+
+```
+k rollout status deploy/<name>                      # Check rollout status (progress of Deployment update)
+k rollout undo deploy/<name>                        # Rollback Deployment to previous revision
+```
+
+## Update Deployment Image
+
+```
+k set image deploy/<name> <container>=<new-image>   # Update container image in a Deployment
+```
+
+## Scale Deployment
+
+```
+k scale deploy/<name> --replicas=N                  # Scale the Deployment to N replicas
+```
+
+## Autoscale Deployment
+
+```
+k autoscale deploy <name> --max=10                  # Create an HPA (autoscaler) with max 10 pods
+```
+
+## Services
+
+```
+k get svc                                          # List all Services
+```
+
+## Expose Deployment as Service
+
+```
+k expose deploy <name> --port=80 --type=NodePort   # Expose Deployment externally as a NodePort service
+```
+
+## Port Forwarding
+
+```
+k port-forward pod/<name> 8080:80                  # Forward local port 8080 → Pod port 80
+```
+
+## Ingress
+
+```
+k get ingress                                      # List all Ingress resources
+```
+
+## List Configurations
+
+```
+k get cm                                           # List all ConfigMaps (short: cm)
+k get secrets                                      # List all Secrets
+```
+
+## Create ConfigMap
+
+```
+k create cm <name> --from-literal=key=value        # Create ConfigMap using literal values
+```
+
+## Create Secret
+
+```
+k create secret generic <name> --from-literal=key=value   # Create Secret using literal values
+```
+
+## Nodes & Namespaces
+
+```
+k get nodes                                        # List all Nodes
+k get ns                                           # List all Namespaces (short: ns)
+k create ns <name>                                 # Create a new Namespace
+```
+
+## Context Management
+
+```
+k config get-contexts                              # Show all kubeconfig contexts
+k config current-context                           # Display current active context
+k config use-context <name>                        # Switch context (change cluster)
+```
+
+## Cluster Info
+
+```
+k cluster-info                                     # Display cluster master & services info
+```
+
+## Jobs
+
+```
+k get jobs                                         # List all Jobs
+k create -f job.yaml                               # Create a Job from YAML file
+k delete job <name>                                # Delete a Job (also deletes its Pods)
+k get pods --selector=job-name=<name>              # List Pods created by a specific Job
+k logs <pod-name>                                  # Check logs of Job's Pod
+```
+
+## CronJobs (Scheduled Jobs)
+
+```
+k get cronjobs                                     # List all CronJobs
+k create -f cronjob.yaml                           # Create a CronJob from YAML file
+```
+
+## List Storage Resources
+
+```
+k get pv                                           # List all Persistent Volumes (cluster-wide)
+k get pvc                                          # List all Persistent Volume Claims (namespace)
+k get sc                                           # List all StorageClasses available
+```
+
+## Inspect Details
+
+```
+k describe pv <name>                               # Show details of PV including claim, capacity, status
+k describe pvc <name>                              # Show PVC details including bound PV, size, accessModes
+```
+
+## Create PV & PVC
+
+```
+k create -f pv.yaml                                # Create a Persistent Volume from YAML file
+k create -f pvc.yaml                               # Create a Persistent Volume Claim from YAML file
+```
+
+## Delete PV & PVC
+
+```
+k delete pv <name>                                 # Delete a PV (handle reclaim policy: Retain/Delete/Recycle)
+k delete pvc <name>                                # Delete a PVC
+```
+
+## List RBAC Objects (Cluster-level)
+
+```
+k get clusterroles                                # List all ClusterRoles (cluster-wide permissions)
+k get clusterrolebindings                          # List all ClusterRoleBindings (bind ClusterRoles to users/SA)
+```
+
+## List RBAC Objects (Namespace-level)
+
+```
+k get roles                                       # List Roles (namespace-scoped permissions)
+k get rolebindings                                # List RoleBindings (bind Roles to users/SA in a namespace)
+```
+
+## Service Accounts (Identities for Pods)
+
+```
+k get sa                                          # List all ServiceAccounts in the namespace
+```
+
+## Create RBAC Objects
+
+```
+k create -f rbac.yaml                             # Create Role, RoleBinding, ClusterRole, or CRB from YAML
+```
+
+## Check User/SA Access (Authorization Check)
+
+```
+k auth can-i get pods \
+  --as=system:serviceaccount:default:my-sa        # Check if a ServiceAccount can perform an action
+```
+
+## List CRDs
+
+```
+k get crds                                         # List all Custom Resource Definitions installed in the cluster
+```
+
+## Inspect CRD
+
+```
+k describe crd <name>                              # Show full schema & details of a specific CRD
+```
+
+## Create CRD
+
+```
+k create -f crd.yaml                               # Create a new CRD definition in the cluster
+```
+
+## List Custom Resources (from CRD)
+
+```
+k get <custom-resource-plural-name>                # List all instances of that Custom Resource
+                                                   # Example: k get databases, k get redisclusters
+
+```
+
+## Create/Update Custom Resource Instances
+
+```
+k apply -f custom-resource.yaml                    # Create or update a Custom Resource instance
+```
+
+## Inspect Node Scheduling State
+
+```
+k describe node <node-name>                         # Check existing taints, conditions, resources
+```
+
+## Taints (Control what pods can run on the node)
+
+```
+k taint node <node-name> key=value:effect           # Apply a taint to block or control pod scheduling
+                                                    # Effects: NoSchedule | PreferNoSchedule | NoExecute
+k taint node <node-name> key:effect-                # Remove a specific taint (the trailing '-' is required)
+```
+
+## Check Tolerations on Pods
+
+```
+k get pods -o yaml | grep tolerations -A 5          # View tolerations applied to pods
+```
+
+## Node Scheduling Control (Cordon / Uncordon / Drain)
+
+```
+k cordon <node-name>                                # Mark a node as unschedulable (no new Pods will be scheduled)
+k uncordon <node-name>                              # Mark node as schedulable again
+k drain <node-name>                                 # Safely evict all pods for maintenance (daemonsets unaffected)
+```
+
+## List Network Policies
+
+```
+k get netpol                                      # List all Network Policies in the current namespace
+```
+
+## Inspect Network Policy
+
+```
+k describe netpol <name>                          # Show detailed configuration of a specific Network Policy
+```
+
+## Create Network Policy
+
+```
+k create -f policy.yaml                           # Create a new Network Policy from a YAML definition file
+```
+
+## Delete Network Policy
+
+```
+k delete netpol <name>                            # Delete a specific Network Policy
+```
+
+## Events (Most useful for Pod failures)
+
+```
+k get events                                                # List recent Events in the namespace
+k get events --sort-by=.lastTimestamp                       # Sort Events by latest occurrence
+k get events --field-selector type=Warning                  # Show only warnings/errors
+```
+
+## Resource Inspection
+
+```
+k describe <resource> <name>                                # Detailed status, events, conditions, config (MOST IMPORTANT)
+```
+
+## Logs
+
+```
+k logs --since=1h <pod-name>                                # Get logs from the last 1 hour
+k logs --previous <pod-name>                                # Logs from the previous container (restart/crashloop)
+```
+
+## Metrics
+
+```
+k top pod                                                   # Real-time CPU/Memory usage for Pods
+k top node                                                  # Real-time CPU/Memory usage for Nodes
+```
+
+## Cluster Info
+
+```
+k version                                                   # Show client & server version
+k cluster-info                                              # Control plane and service URLs
+k api-resources                                             # List all API resources and short names
+```
+
+## Shell Access
+
+```
+k exec -it <pod-name> -- sh                                 # Full shell inside a running container
+```
+
+## Networking Tests
+
+```
+k exec <pod-name> -- curl <service-name>                    # Network test from within a container
+```
+
+## Port Forwarding
+
+```
+k port-forward <pod-name> 8080:80                           # Access pod port 80 on local port 8080
+```
+
+## Ephemeral Debug Container
+
+```
+k debug -it <pod-name> --image=busybox                      # Add temporary debug container (v1.18+)
+```
+
+## Copy Files
+
+```
+k cp /local/file <pod-name>:/remote/path                    # Copy local → container
+k cp <pod-name>:/remote/file /local/path                    # Copy container → local
+```
+
+```
+k get nodes                                                 # Check node readiness (Ready / SchedulingDisabled)
+```
+
+## Node Scheduling Controls
+
+```
+k cordon <node-name>                                        # Mark node unschedulable (no new pods)
+k drain <node-name>                                         # Evict pods, prepare for maintenance
+k drain <node-name> --ignore-daemonsets                     # Drain but skip DS pods (recommended)
+
+k uncordon <node-name>                                      # Make node schedulable again
+k delete node <node-name>                                   # Remove node object (used after shutdown)
+```
+
+## kubeconfig
+
+```
+k config view                                               # Show full kubeconfig (contexts, clusters, users)
+```
+
+## API Documentation
+
+```
+k explain pod.spec.containers                               # Detailed API docs for any field
+k api-resources --namespaced=true                           # List only namespace-scoped resources
+k api-resources --namespaced=false                          # List only cluster-scoped resources
+```
+
+## Labels
+
+```
+k label node <name> disk=ssd                                # Add label to node
+k label pod <name> app-                                     # Remove label (note the "-")
+```
+
+## Annotations
+
+```
+k annotate pod <name> key=value                             # Add annotation (non-identifying metadata)
+```
+
+## Label Selectors
+
+```
+k get pod -l app=frontend                                   # List pods using label selector
+```
+
