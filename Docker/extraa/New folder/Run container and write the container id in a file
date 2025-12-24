@@ -1,5 +1,0 @@
-Run container and write the container id in a file 
----------------------------------------------------
-	
-	$ docker run --cidfile /tmp/cid.txt ubuntu echo "hi!"
-

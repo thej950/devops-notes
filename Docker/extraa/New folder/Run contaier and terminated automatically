@@ -1,6 +1,0 @@
-Run contaier and terminated automatically
------------------------------------------
-	
-	$ docker run busybox --name busybox echo "hello world"
-		-> using above command contaier will be create and excute echo command and then terminate after  echo command excution 
-

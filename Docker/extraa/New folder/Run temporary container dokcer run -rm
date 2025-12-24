@@ -1,7 +1,0 @@
-Run temporary container dokcer run -rm
-----------------------------------------
-
-	$ docker run --rm -it my-image /bin/bash
-
-		--rm : container will be removed when its exists
-

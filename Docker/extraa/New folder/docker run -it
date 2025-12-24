@@ -1,8 +1,0 @@
-docker run -it 
----------------------------
-
-
-	$ docker rin -it busybox /bin/sh
-
-		-i / --interactive: it will allow to interact / run commands in the container
-		-t / --tty: attach remote console to our local console 

@@ -1,7 +1,0 @@
-Run container in a loop
---------------------------
-	
-	$ docker run --name my-container alpine /bin/sh -c "while true; do sleep 2; date; done"
-		-> above command will run container that will be show date every 2 seconds 
-
-	

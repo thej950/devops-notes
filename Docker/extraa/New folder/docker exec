@@ -1,9 +1,0 @@
-docker exec 
---------------
-	
-	$ docker exec -it my-container bash
-		-> it it will interactive with terminal to excute command 
-
-	$ docker exec -d my-container touch path/my/file
-		-> above command will perform in the deattached mode 
-		

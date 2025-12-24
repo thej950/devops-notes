@@ -1,7 +1,0 @@
-Run container with custome port
----------------------------------
-	
-	$ docker run -p 9090:80 my-image
-
-		-p : map local port to remote port 
-		

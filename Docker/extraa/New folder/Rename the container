@@ -1,6 +1,0 @@
-Rename the container 
-----------------------
-	
-	$ docker container rename my-old-container my-new-container
-
-	

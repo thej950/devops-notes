@@ -1,7 +1,0 @@
-docker restart -t 15
------------------------
-	
-	$ docker restart -t 15 my-container 
-
-		-t / --time -->container will wait for 15 sec then it will restart 
-		
