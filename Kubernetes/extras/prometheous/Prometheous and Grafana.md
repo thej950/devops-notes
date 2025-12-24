@@ -1,196 +1,259 @@
-Prometheous and Grafana
-------------------------
+# 📊 Prometheus and Grafana (Beginner Friendly)
 
-Prometheous:
-------------
--> Prometheous is a monitoring tool for scrapping the performance metrics of any given hardware resources(CPU, VM, Cloud Virtual Machine, Router etc.) Prometheous scraps the data with timestamp which can be stored on a server and accessed using the PromQL
--> Prometheous has superd support API which makes Prometheous integration with any resource Present in the data center. Prometheous architecture is really scalable and 3rd party libraries and makes it more powerful. 
--> Prometheous is a Monitoring tool it will monitor and alerting are very crucial to mesures the performance metrics of an application running in production environment
+---
 
--> To check target machines are available to show 
-	
-	localhost:9090/target
+## 🔹 Prometheus
 
+### What is Prometheus?
 
+Prometheus is a **monitoring tool**.
 
-Advantages of Prometeous:
-------------------------
-1. Prometheous is independent framework it will not impact our cloud or in-premise infrastrucher 
-2. It can be customised suite our infrastrucher needs  
-3. To use Prometheous use to install required node exporter only instead of install multiple node exporters extra overhead on hardware resources 
-4. Prometheous exporter can be customised to suite for our infrastrucher need, 
-5. If we do not find our required node exporter in the library then prometheous allo to build our custome node exporter 
-6. Prometheous comes with PromQL and TSDB which makes it more powerfull for debugging ad troubleshooting 
-7. Prometheous has a build in database and you do not have to install adatabase seperatly 
-8.The pull mechanism of prometheous is very flexible. and it allow to schedule variable scrappers at different intervals 
-9. Prometheous is a open source it has a wide variety of community support for developers  
+* It **collects (scrapes)** performance metrics from:
 
+  * CPU
+  * Memory
+  * Disk
+  * Network
+  * VM, Cloud VM, Servers, Routers, etc.
+* Prometheus **stores metrics with timestamp**.
+* We can query data using **PromQL (Prometheus Query Language)**.
+* It has a **powerful API**, so it can integrate with almost any system.
+* It is **highly scalable** and supports **third-party exporters**.
+* Monitoring and alerting are very important to **measure application health in production**.
 
-Node Exporter:
---------------
--> Node exporter is responsible for fetching the statics from the various hardware and virtual resources in the format of which promethous can understand 
--> with the help of prometheous server those statics can be exposed on port 9100 
--> There are many third party Node exporters which can be used by SREs as well as Devops based on their application needs. But primarly we look for these metrics ( CPU usage, Memory Usage, Disk Usage, Network Usage ) 
--> This node exporter used to collect various hardware and kernel-level metrics of our machine 
+👉 To check whether target machines are up or not:
 
+```
+http://localhost:9090/targets
+```
 
+---
 
+## ✅ Advantages of Prometheus
 
-Grafana:
----------
-->  Grafana is a user interface for viewing the metrics scrapped by prometheous from various resources.
--> Grafana is a open source analytics and visualization tool. Grafana does not store any data, But instead, it relies on prometheous to send the data so that dashboard can be prepared. 
--> Also Grafana is used for sending notifications and mail alerts based on various threshholds. 
--> One of the coll feature in Grafana is Garafana Labs ( In this Grafana Labs we can able download the dashboards prepared by other developers so there is not required to re-invent the wheel)
+1. Prometheus is **independent** and does not affect cloud or on-prem infrastructure
+2. It can be **customized** based on infrastructure needs
+3. Only required **exporters** are installed → less hardware overhead
+4. Exporters can be **custom-built**
+5. If an exporter is not available, we can **create our own exporter**
+6. Comes with **PromQL + TSDB**, very useful for troubleshooting
+7. Has **built-in database**, no need for extra DB
+8. Uses **pull mechanism**, very flexible scrape intervals
+9. **Open source** with strong community support
 
-Advantages of Grafana:
------------------------
-1. If we compare Grafana with traditional tools like Zabbix and LibreNMS here Grafana allow to create multiple datasources where as Zabbix and LibreNMS allow to create single datasource 
-2. In Grafana dashboard we can cutomised based on our reuirement. also we can have integration with multiple datasources in the same dashboard which is far more biggest merit of grafana 
-3. In Grafana opensource community we can share our dashboard setting to others and we can get others dash boards as well from community so here we not re-invent wheel everytime 
-4. Grafana Dashboard lokks good and it is allow developers to put PNG image on Dashboard for more Appealing 
-5. Grafana developers community is building a lot of features and variaous datasources support which makes grafana more adaptable for various infrastrucher monitoring needs. 
+---
 
+## 🔹 Node Exporter
 
+### What is Node Exporter?
 
+* Node Exporter **collects hardware and OS metrics**
+* It exposes metrics in a format **Prometheus understands**
+* Runs on **port 9100**
+* Common metrics:
 
+  * CPU usage
+  * Memory usage
+  * Disk usage
+  * Network usage
+* Collects **kernel-level and system-level metrics**
 
-Prometheous Installation:
-------------------------
--> There are multiple ways to install prometehous On of the Way is below installation type 
+🧠 **Simple analogy:**
+Node Exporter is like a **sensor** installed on a machine.
+Prometheus comes and **reads data from the sensor**.
 
-step1: Installing Prometheous 
-	
-	Official website To download: https://prometheus.io/download/
+---
 
-	To Download Using Binary from  LTS 
+## 🔹 Grafana
 
-		https://github.com/prometheus/prometheus/releases/download/v2.45.1/prometheus-2.45.1.linux-amd64.tar.gz
+### What is Grafana?
 
-		$ mkdir prometheous
-		$ cd prometheous
+* Grafana is a **visualization tool**
+* It **displays metrics** collected by Prometheus
+* Grafana **does not store data**
+* It uses Prometheus as a **data source**
+* Used for:
 
-		$ wget https://github.com/prometheus/prometheus/releases/download/v2.45.1/prometheus-2.45.1.linux-amd64.tar.gz
+  * Dashboards
+  * Alerts
+  * Email notifications
+* Grafana Labs provides **ready-made dashboards**
 
-	Extract this prometheous 
+🧠 **Analogy:**
+Prometheus = Data collector
+Grafana = TV screen to view that data
 
-		$ tar xvfz prometheus-x.xx.x.linux-amd64.tar.gz
+---
 
-		$ cd prometheus-x.xx.x.linux-amd64.tar.gz
+## ✅ Advantages of Grafana
 
-		$ ./prometheous
+1. Supports **multiple data sources** (Prometheus, Loki, InfluxDB, etc.)
+2. Dashboards are **fully customizable**
+3. Multiple data sources in **one dashboard**
+4. Community dashboards → **no need to reinvent the wheel**
+5. Dashboards look **clean and professional**
+6. Strong **open-source community**
+7. Supports images, alerts, and many plugins
 
-			-> Now promethous has been running access prometheous using localhost:9090 from browser 
+---
 
-step2: Insalling Node Exporter 
-	
-	Dowload Node exporte using Binary way Official website:https://prometheus.io/download/#node_exporter
-	-> Look for node_exporter 
+# 🛠️ Prometheus Installation
 
-	$ mkdir node-exporter 
-	$ cd node-exporter
+## 🔹 Step 1: Install Prometheus
 
-	$ wget https://github.com/prometheus/node_exporter/releases/download/v1.7.0/node_exporter-1.7.0.linux-amd64.tar.gz
+Official website:
+👉 [https://prometheus.io/download/](https://prometheus.io/download/)
 
-	$ tar -xvzf node_exporter-1.7.0.linux-amd64.tar.gz
+### Download binary
 
-	$ cd node_exporter-1.7.0.linux-amd64.tar.gz
+```
+wget https://github.com/prometheus/prometheus/releases/download/v2.45.1/prometheus-2.45.1.linux-amd64.tar.gz
+```
 
-	$ ./node_exporter 
+### Extract
 
-		-> from above command node exporter are running it can be access using localhost:9100 
+```
+tar -xvzf prometheus-2.45.1.linux-amd64.tar.gz
+cd prometheus-2.45.1.linux-amd64
+```
 
+### Start Prometheus
 
-step3: Adding node_exporter scrap_configs To prometheous as a YAML Configurations 
-	
-	-> Create a file inside prometheous location where we unzip prometheous 
-	-> Below file used establish connection from prometheous to nodeexporter 
+```
+./prometheus
+```
 
-	$ vim exporte-config.yaml
+👉 Access Prometheus:
 
-	++++++++++++++++++++++++++++++++++++++++++++++++++++
+```
+http://localhost:9090
+```
 
-			global:
-			   scrape_interval: 15s
+---
 
-			scrape_configs:
-			   - job_name: node
-			     static_configs:
-			        - targets: ['localhost:9100','100.0.0.3:9100'] 
-	
-	++++++++++++++++++++++++++++++++++++++++++++++++++++++
+## 🔹 Step 2: Install Node Exporter
 
-	-> node export collects the data of current machine export to prometheos server using above file 
-	-> In the scrape_configs block -> inside static_configs -> here mentioned target Two machine those two machines information will be exported to prometheous 
-	-> using above file we able to setup export current machine metrics to prometheous server 
+Official site:
+👉 [https://prometheus.io/download/#node_exporter](https://prometheus.io/download/#node_exporter)
 
-	To start the prometheous server 
+### Download
 
-		$ ./prometheus --config.file=exporter.yml
+```
+wget https://github.com/prometheus/node_exporter/releases/download/v1.7.0/node_exporter-1.7.0.linux-amd64.tar.gz
+```
 
-			-> from above command knows which server need to scrap 
+### Extract
 
-step4: Installing Grafana
-	
-	-> After setup prometheous and node exporters setup grafana for to view dashboards of metrics 
-	-> Grafana actually display metrics to visualize them to understand easily 
+```
+tar -xvzf node_exporter-1.7.0.linux-amd64.tar.gz
+cd node_exporter-1.7.0.linux-amd64
+```
 
-	To install Grafana from Official website: https://grafana.com/docs/grafana/latest/setup-grafana/installation/
+### Start Node Exporter
 
-	On ubuntu
-	-----------
+```
+./node_exporter
+```
 
-		$ sudo apt-get install -y apt-transport-https software-properties-common wget
+👉 Access Node Exporter:
 
-		$ sudo mkdir -p /etc/apt/keyrings/
+```
+http://localhost:9100
+```
 
-		$ wget -q -O - https://apt.grafana.com/gpg.key | gpg --dearmor | sudo tee /etc/apt/keyrings/grafana.gpg > /dev/null
+---
 
-		$ echo "deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
+## 🔹 Step 3: Configure Prometheus to Scrape Node Exporter
 
-		$ echo "deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com beta main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
+Create config file:
 
-		$ sudo apt-get update
+```
+vim prometheus.yml
+```
 
-		$ sudo apt-get install grafana
+### Configuration
 
-		$ sudo apt-get install grafana-enterprise
+```yaml
+global:
+  scrape_interval: 15s
 
-		$ sudo systemctl daemon-reload
-		
-		$ sudo systemctl start grafana-server
-		
-		$ sudo systemctl status grafana-server
+scrape_configs:
+  - job_name: "node"
+    static_configs:
+      - targets: ['localhost:9100', '100.0.0.3:9100']
+```
 
-		$ sudo systemctl enable grafana-server.service
-	
-	-> Now we able to access Grafana using localhost:3000/login 
-	-> Default username is (admin) password (admin)
+### Start Prometheus with config
 
-step5: To setup Grafana Dashboard
-	
-	-> after all installing promethous and node exporter and grafana now we need to setup dashboard for to visualize metrics 
+```
+./prometheus --config.file=prometheus.yml
+```
 
-	-> grafana is a analytics and visulaization dashboard 
-	-> grafana does not store data, but istead it relies on Datasource conection towards the prometheos server it is responsible for scraping and storing the data  
+👉 Now Prometheus scrapes metrics from both machines
 
-	Now create Prometheous Datasource Inside Grafana Dashboard 
-	------------------------------------------------------------
-	-> Goto Grafana Dashboard -> goto Home-> click on connections->click Data source->click on Add data source->select prometheous-> enter hostame or Ip address of the rometheous server or localhost (http://localhost:9090)-> click on save and test 
+---
 
-	Now Import Dashboard From Grafana Labs
-	-----------------------------------------
-	-> Goto Grafana Dashboard->search as Linux memory (here get one number (2747))->now using that number 
-	-> goto home->click on create->select import->type that number (2747)->click on load->click on import
-	->after that we able to see memory dashboard 
+## 🔹 Step 4: Install Grafana (Ubuntu)
 
+Official docs:
+👉 [https://grafana.com/docs/grafana/latest/setup-grafana/installation/](https://grafana.com/docs/grafana/latest/setup-grafana/installation/)
 
+### Commands
 
-==================================
+```
+sudo apt-get install -y apt-transport-https software-properties-common wget
+sudo mkdir -p /etc/apt/keyrings/
+wget -q -O - https://apt.grafana.com/gpg.key | gpg --dearmor | sudo tee /etc/apt/keyrings/grafana.gpg > /dev/null
+echo "deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com stable main" | sudo tee /etc/apt/sources.list.d/grafana.list
+sudo apt-get update
+sudo apt-get install grafana
+```
 
-To run commands in Backround 
------------------------------
-	
-	$ nohup ./node_exporter > node_exporter.log 2>&1 &
+### Start Grafana
 
+```
+sudo systemctl daemon-reload
+sudo systemctl start grafana-server
+sudo systemctl enable grafana-server
+```
+
+👉 Access Grafana:
+
+```
+http://localhost:3000/login
+```
+
+Default login:
+
+* Username: **admin**
+* Password: **admin**
+
+---
+
+## 🔹 Step 5: Configure Grafana Dashboard
+
+### Add Prometheus Data Source
+
+1. Grafana → Home
+2. Connections → Data Sources
+3. Add data source → Prometheus
+4. URL: `http://localhost:9090`
+5. Save & Test
+
+---
+
+### Import Dashboard from Grafana Labs
+
+1. Go to Grafana → Create → Import
+2. Enter Dashboard ID: **2747**
+3. Click Load → Import
+4. Linux memory dashboard will appear
+
+---
+
+## 🔹 Run Node Exporter in Background
+
+```
+nohup ./node_exporter > node_exporter.log 2>&1 &
+```
 
