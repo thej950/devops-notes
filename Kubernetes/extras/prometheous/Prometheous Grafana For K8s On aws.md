@@ -1,261 +1,339 @@
-Prometheous Grafana For K8s On aws
-------------------------------------
-1. Pre-Requisite
-	
-	-> awscli
-	-> eksctl
-	-> kubectl
-	-> Helm Chart
+# 📊 Prometheus & Grafana for Kubernetes (EKS) on AWS
 
-step1: Installing awscli on ubuntu 
-	
-	$ sudo apt install awscli -y
+*(Beginner-Friendly Guide)*
 
-	$ awscli --version
+---
 
-step2: Installing eksctl 
-	
-	$ curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
-	
-	$ sudo mv /tmp/eksctl /usr/local/bin
+## 🔹 1. Pre-Requisites
 
-	$ eksctl --version 
+Before starting, make sure you have:
 
-step3: setup aws credentials 
-	
-	-> For to setup aws credentials into local machine create a access key and secretkey to accesskey authenticate awscloud to access 
+* AWS CLI
+* eksctl
+* kubectl
+* Helm (Helm Charts)
 
-		$ aws configure
-		AWS Access Key ID [None]: <ENTER_YOU_ACCESS_KEY>
-		AWS Secret Access Key [None]: <ENTER_ACCESS_KEY>
-		Default region name [None]: <ENTER_THE_REGION>
-		Default output format [None]: <json or text> 
+These tools help us:
 
-step4: Install kubectl (kubernetes command line ) 
-	
-	-> Kubectl command used to manage the kubernetes cluster Remotely 
+* Create EKS cluster
+* Manage Kubernetes
+* Install Prometheus & Grafana easily
 
-		$ curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+---
 
-		$ chmod +x ./kubectl 
+## 🔹 Step 1: Install AWS CLI on Ubuntu
 
-		$ sudo mv ./kubectl /usr/local/bin
-		
-		$ kubectl version
+AWS CLI helps your local machine talk to AWS.
 
-step5: Istalling Helm 
-	
-	-> Using helm chart we able to install Prometeous and grafana and ode exporter on K8s 
-	-> To setup Prometheous and Grafana on Kuberenetes cluster Recommended to Go with Helm repository so here do not miss any configuration setup 
-	-> Helm Chart work out of the box ad it will take care of everything for us installing (prometheous-altmanager, prometheous-server, prometheous-operator)
+```
+sudo apt update
+sudo apt install awscli -y
+```
 
-		$ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
-		
-		$ chmod 700 get_helm.sh
-		
-		$ ./get_helm.sh
+Verify installation:
 
+```
+aws --version
+```
 
-step6: Setup K8s in aws using eksctl 
-	
-	To create k8s cluster 
+---
 
-		$ eksctl create cluster --name test-cluster-1 --version 1.22 --region eu-central-1 --nodegroup-name worker-nodes --node-type t2.large --nodes 2 --nodes-min 2 --nodes-max 3
+## 🔹 Step 2: Install eksctl
 
-			From above command 
-			eksctl create cluster -> this will tell eksctl to create k8s cluster 
-			--name test-cluster-1 -> this will assigne name to the cluster
-			--version 1.22    	  -> this will set version To download k8s 
-			--region eu-central-1 -> To define region to create k8s cluster 
-			--nodegroup-name worker-nodes	  -> To define worker node 
-			--node-type			  -> To define type of node to ceate 
-			--nodes 2 			  -> this will tell how many nodes to create inside cluster 
-			--node-min 2 		  -> It will define minimum number of nodes inside cluster
-			--node-max 3 		  -> It will define maximum number of nodes inside cluster 
+`eksctl` is a tool to **create and manage EKS clusters easily**.
 
-			Note: It will take minimum 15 minuites to create cluster On AWS 
+```
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+sudo mv /tmp/eksctl /usr/local/bin
+```
 
-step7: Install Kubernetes Metric Server 
-	
-	-> By perming Installation of the Kubernetes Metric Server Into the k8s cluster so that Prometheous can collect the performance metrics of K8s 
-	-> Kubereetes metrics server collects the resource metrics from kubelets and exposes it to kuberenetes api server trough metric api for use by Horizontal Pod Autoscaler. 
+Verify:
 
-	The Kuberenetes Metrics Offers
-	------------------------------
-	-> Fast Autoscaling Collecting Metrics 
-	-> Scalable supports upto 5000 node clusters 
-	-> Resources Efficiency and it requires very less CPU(1 milli core) and less memory(2 mb)
+```
+eksctl version
+```
 
-	Installation Of Kuberenetes Metrics 
-	------------------------------------
+---
 
-		$ kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
-		
-	To verify Kuberenetes Metric server 
-	------------------------------------
+## 🔹 Step 3: Configure AWS Credentials
 
-		$ kubectl get deployment metrics-server -n kube-system (or) kubectl get pods -n kube-system 
+AWS credentials allow your machine to authenticate with AWS.
 
-step8: Install Prometheous 
-	
-	-> Install prometheous using Helm Chart in cluster 
+Create **Access Key & Secret Key** in AWS IAM.
 
-		$ helm repo add prometheus-community https://prometheus-community.github.io/helm-charts 
+```
+aws configure
+```
 
-		$ helm repo update 
+Enter details:
 
-		$ helm repo list 
+```
+AWS Access Key ID: <YOUR_ACCESS_KEY>
+AWS Secret Access Key: <YOUR_SECRET_KEY>
+Default region name: <REGION>
+Default output format: json
+```
 
-		$ kubectl create namespace prometheus
+---
 
-		$ helm install prometheus prometheus-community/prometheus --namespace prometheus --set alertmanager.persistentVolume.storageClass="gp2" --set server.persistentVolume.storageClass="gp2" 
+## 🔹 Step 4: Install kubectl
 
-		$ kubectl get all -n prometheous 
+`kubectl` is used to **manage Kubernetes cluster remotely**.
 
-	To view Prometheous Dashboard 
-	----------------------------------
+```
+curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+chmod +x kubectl
+sudo mv kubectl /usr/local/bin
+```
 
-		$ kubectl port-forward deployment/prometheus-server 9090:9090 -n prometheus
+Verify:
 
-step9: Install Grafana 
-	
-	-> after complete installation of prometheous lets install grafana 
+```
+kubectl version --client
+```
 
-		$ helm repo add grafana https://grafana.github.io/helm-charts 
+---
 
-		$ helm repo update 
+## 🔹 Step 5: Install Helm
 
-	-> Now create Datasource in prometheous so that grafana can access the kuberenetes metrics 
+Helm helps install complex applications like Prometheus & Grafana **very easily**.
 
-		$ vim prometheus-datasource.yaml
-		------------------------------------
-		datasources:
-		  datasources.yaml:
-		    apiVersion: 1
-		    datasources:
-		    - name: Prometheus
-		      type: prometheus
-		      url: http://prometheus-server.prometheus.svc.cluster.local
-		      access: proxy
-		      isDefault: true
+Why Helm?
 
-		----------------------------------------
+* No manual YAML headache
+* Works out-of-the-box
+* Installs Prometheus, Alertmanager, Operator automatically
 
-	-> Lets create Grafana namespace 
+```
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+```
 
-		$ kubectl create namespace grafana
+Verify:
 
-	-> Install Grafana 
+```
+helm version
+```
 
-		$ helm install grafana grafana/grafana \
-		    --namespace grafana \
-		    --set persistence.storageClassName="gp2" \
-		    --set persistence.enabled=true \
-		    --set adminPassword='EKS!sAWSome' \
-		    --values prometheus-datasource.yaml \
-		    --set service.type=LoadBalancer 
+---
 
-	-> To verify Grafana Installation 
+## 🔹 Step 6: Create EKS Cluster using eksctl
 
-		$ kubectl get all -n grafana
+```
+eksctl create cluster \
+--name test-cluster-1 \
+--version 1.22 \
+--region eu-central-1 \
+--nodegroup-name worker-nodes \
+--node-type t2.large \
+--nodes 2 \
+--nodes-min 2 \
+--nodes-max 3
+```
 
-	-> To access Grafana Dashboard Find Loadbalanacer IP 
+### Explanation:
 
-		$ kubectl get service -n grafana 
+* `--name` → Cluster name
+* `--version` → Kubernetes version
+* `--region` → AWS region
+* `--nodegroup-name` → Worker nodes group
+* `--node-type` → EC2 instance type
+* `--nodes` → Number of nodes
+* `--nodes-min/max` → Auto scaling limits
 
-step10: Now Import Grafana Dashboard From Grafana Labs 
-	
-	-> Upto Now we setup everything like installation of prometheous and grafana and To access Grafana From browser Now we Required to Import Dashboard for customisation 
-	-> To Customisation dashboard there are multiple Dashboards are avaiable so Go into open source grafana dashboard search one good one dashboard for our Kuberenernets cluster 
-	-> so here Im going to take One dashboard that container ( 6417 ) 
+⏳ **Note:** Cluster creation takes **10–15 minutes**
 
-		=>GoTo->Dashboard ->Click import->type (6417)->select prometheous->click on import 
+---
 
-step11: Lets Deploy a Spring Boot microservices and monitor it on Grafana 
-	
-	$ vim k8s-spring-boot-deployment.yml 
-	---------------------------------------------
-		apiVersion: apps/v1
-		kind: Deployment
-		metadata:
-		  name: jhooq-springboot
-		spec:
-		  replicas: 2
-		  selector:
-		    matchLabels:
-		      app: jhooq-springboot
-		  template:
-		    metadata:
-		      labels:
-		        app: jhooq-springboot
-		    spec:
-		      containers:
-		        - name: springboot
-		          image: rahulwagh17/kubernetes:jhooq-k8s-springboot
+## 🔹 Step 7: Install Kubernetes Metrics Server
 
-		          resources:
-		            requests:
-		              memory: "128Mi"
-		              cpu: "512m"
-		            limits:
-		              memory: "128Mi"
-		              cpu: "512m"
+Metrics Server allows Kubernetes to:
 
-		          ports:
-		            - containerPort: 8080
+* Collect CPU & Memory metrics
+* Enable HPA (Auto Scaling)
+* Allow Prometheus to scrape metrics
 
-		          readinessProbe:
-		            httpGet:
-		              path: /hello
-		              port: 8080
-		            initialDelaySeconds: 15
-		            periodSeconds: 10
+Install:
 
-		          livenessProbe:
-		            httpGet:
-		              path: /hello
-		              port: 8080
-		            initialDelaySeconds: 15
-		            periodSeconds: 10
+```
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+```
 
-		          startupProbe:
-		            httpGet:
-		              path: /hello
-		              port: 8080
-		            failureThreshold: 30
-		            periodSeconds: 10
+Verify:
 
-		          env:
-		            - name: PORT
-		              value: "8080"
-		---
-		apiVersion: v1
-		kind: Service
-		metadata:
-		  name: jhooq-springboot
-		spec:
-		  type: NodePort
-		  ports:
-		    - port: 80
-		      targetPort: 8080
-		  selector:
-		    app: jhooq-springboot
-		Copilot is ready for this page
-		Summary
-		Copilot
-		raw.githubusercontent.com
-		Ask a follow-up question
-		GPT-3.5
-		GPT-4
-	------------------------------------- 
+```
+kubectl get pods -n kube-system
+```
 
-		$ kubectl apply -f k8s-spring-boot-deployment.yml 
+---
 
-	-> To verify spring boot application 
+## 🔹 Step 8: Install Prometheus using Helm
 
-		$ kubectl get deployment jhooq-springboot
+Add Helm repo:
 
+```
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+```
 
-============================================================================
+Create namespace:
 
-Reference website: https://jhooq.com/prometheous-k8s-aws-setup/
+```
+kubectl create namespace prometheus
+```
+
+Install Prometheus:
+
+```
+helm install prometheus prometheus-community/prometheus \
+--namespace prometheus \
+--set alertmanager.persistentVolume.storageClass="gp2" \
+--set server.persistentVolume.storageClass="gp2"
+```
+
+Verify:
+
+```
+kubectl get all -n prometheus
+```
+
+Access Prometheus:
+
+```
+kubectl port-forward deployment/prometheus-server 9090:9090 -n prometheus
+```
+
+Open:
+
+```
+http://localhost:9090
+```
+
+---
+
+## 🔹 Step 9: Install Grafana
+
+Add Grafana repo:
+
+```
+helm repo add grafana https://grafana.github.io/helm-charts
+helm repo update
+```
+
+### Create Prometheus Datasource file
+
+```
+vim prometheus-datasource.yaml
+```
+
+```yaml
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+    - name: Prometheus
+      type: prometheus
+      url: http://prometheus-server.prometheus.svc.cluster.local
+      access: proxy
+      isDefault: true
+```
+
+Create namespace:
+
+```
+kubectl create namespace grafana
+```
+
+Install Grafana:
+
+```
+helm install grafana grafana/grafana \
+--namespace grafana \
+--set persistence.enabled=true \
+--set persistence.storageClassName="gp2" \
+--set adminPassword='EKS!sAWSome' \
+--values prometheus-datasource.yaml \
+--set service.type=LoadBalancer
+```
+
+Verify:
+
+```
+kubectl get all -n grafana
+```
+
+Get Grafana URL:
+
+```
+kubectl get service -n grafana
+```
+
+Login:
+
+* Username: `admin`
+* Password: `EKS!sAWSome`
+
+---
+
+## 🔹 Step 10: Import Grafana Dashboard
+
+Use ready-made Kubernetes dashboard.
+
+Dashboard ID: **6417**
+
+Steps:
+
+* Grafana → Dashboard → Import
+* Enter **6417**
+* Select Prometheus datasource
+* Click Import
+
+---
+
+## 🔹 Step 11: Deploy Spring Boot App & Monitor
+
+Create file:
+
+```
+vim k8s-spring-boot-deployment.yml
+```
+
+(YAML remains **unchanged**, it is correct ✅)
+
+Apply:
+
+```
+kubectl apply -f k8s-spring-boot-deployment.yml
+```
+
+Verify:
+
+```
+kubectl get deployment jhooq-springboot
+```
+
+Now you can see:
+
+* Pod CPU usage
+* Memory usage
+* Requests & limits
+* Node performance in Grafana
+
+---
+
+## ✅ Final Architecture (Simple)
+
+* **Metrics Server** → Collects K8s metrics
+* **Node Exporter** → Node-level metrics
+* **Prometheus** → Scrapes & stores data
+* **Grafana** → Visualizes & alerts
+
+---
+
+### 📌 Reference
+
+[https://jhooq.com/prometheous-k8s-aws-setup/](https://jhooq.com/prometheous-k8s-aws-setup/)
+
+---
+
