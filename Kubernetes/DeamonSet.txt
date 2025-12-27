@@ -1,32 +1,91 @@
-DeamonSet: 21:00 min 30:00 min docker kubernetes 25th session  
-----------------------------------
--->deamonset it is an object it ensure that each one copy available on each and every slave in the cluster 
--->this is used for mainly for logs collector
-$vim daemonset.yml
-=================================
+![Image](https://www.bluematador.com/hs-fs/hubfs/blog/new/An%20Introduction%20to%20Kubernetes%20DaemonSets/DaemonSets.png?name=DaemonSets.png\&width=770)
+
+![Image](https://devopscube.com/content/images/2025/03/daemonset-explained-1.png)
+
+## 🔁 DaemonSet in Kubernetes (Beginner Friendly)
+
+### What is a DaemonSet?
+
+* A **DaemonSet** ensures that **one Pod runs on every node** in the cluster.
+* When a **new node is added**, the Pod is created **automatically**.
+* When a **node is removed**, the Pod is deleted.
+
 ---
+
+### Why do we use DaemonSet?
+
+* For **node-level services**.
+* Services that must run on **all nodes**, not just some Pods.
+
+Common use cases:
+
+* Log collection (Fluentd)
+* Monitoring agents (Node Exporter)
+* Networking (CNI plugins)
+* Security agents
+
+---
+
+### Simple Example
+
+* If you have **5 nodes**, DaemonSet runs **5 Pods**.
+* You don’t set replicas manually.
+* Kubernetes manages it automatically.
+
+---
+
+### 🧠 Easy Analogy (Very Important ⭐)
+
+* **Cluster** = Apartment building
+* **Nodes** = Floors
+* **DaemonSet Pod** = Security guard
+
+👉 Every floor must have **one guard**.
+If a new floor is added → new guard comes automatically.
+
+---
+
+### DaemonSet vs Deployment (One Line)
+
+* **Deployment** → runs Pods based on replica count
+* **DaemonSet** → runs exactly **one Pod per node**
+
+---
+
+### Small DaemonSet Example
+
+```yaml
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: nginx-daemonset
-  labels:
-    type: proxy
+  name: log-agent
 spec:
   selector:
     matchLabels:
-      type: proxy
+      app: log-agent
   template:
     metadata:
-      name: nginx-pod
       labels:
-        type: proxy
+        app: log-agent
     spec:
       containers:
-        - name: mynginx
-          image: nginx        
+      - name: log-agent
+        image: fluent/fluentd
+```
 
-...
-======================
--->from above file daemonset definition file it will ensure all slave machine containe on set of nginx pod must be availabel at any time 
--->even increasing and decreasing slaves also it will take care of everything nginx service must be present on each slave
-==================================
+---
+
+### When NOT to use DaemonSet?
+
+* For normal applications
+* For web apps or APIs
+* Use **Deployment** instead
+
+---
+
+## ⭐ Interview Tip
+
+Say this clearly:
+
+> “A DaemonSet ensures a single Pod runs on every Kubernetes node, mainly for logging, monitoring, and node-level services.”
+
