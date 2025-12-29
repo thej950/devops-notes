@@ -40,7 +40,7 @@ services:
   mydb:
     image: mysql
     environment:
-      MYSQL_ROOT_PASSWORD: intelliqit
+      MYSQL_ROOT_PASSWORD: thej
 
   wordpress:
     image: wordpress

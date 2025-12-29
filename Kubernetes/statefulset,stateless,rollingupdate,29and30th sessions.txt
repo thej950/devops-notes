@@ -131,7 +131,7 @@ spec:
            image: mysql:5
            env:
               - name: MYSQL_ROOT_PASSWORD
-                 value: intelliqit
+                 value: thej
            volumeMounts:
                - name: new-volume
                  mountPath: /var/lib/mysql

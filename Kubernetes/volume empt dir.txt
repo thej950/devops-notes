@@ -11,7 +11,7 @@ kind: Pod
 metadata:
   name: pod-redis
   labels:
-    author: intelliqit
+    author: thej
 spec:
   containers:
     - name: myredis
@@ -31,7 +31,7 @@ $ kubectl apply -f volumes1.yml
 ex:
 ----------------
 FROM redis
-MAINATAINER intelliqit
+MAINATAINER thej
 RUN apt-get update -y
 RUN apt-get install -y procs
 -------------------------------------------

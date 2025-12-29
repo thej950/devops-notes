@@ -29,7 +29,7 @@
 ### Example:
 
 ```bash
-kubectl label node <node-name> slave1=intelliqit1
+kubectl label node <node-name> slave1=thej1
 ```
 
 ```yaml

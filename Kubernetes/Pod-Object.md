@@ -110,7 +110,7 @@ spec:
     image: postgres
     env:
     - name: POSTGRES_PASSWORD
-      value: intelliqit
+      value: thej
 ```
 
 ---

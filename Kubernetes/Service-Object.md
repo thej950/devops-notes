@@ -164,7 +164,7 @@ metadata:
   name: nginx-pod
   labels:
     type: proxy
-    author: intelliqit
+    author: thej
 spec:
   containers:
   - name: mynginx
@@ -184,7 +184,7 @@ spec:
   type: NodePort
   selector:
     type: proxy
-    author: intelliqit
+    author: thej
   ports:
   - port: 80
     targetPort: 80
@@ -304,7 +304,7 @@ kind: Pod
 metadata:
   name: httpd-pod
   labels:
-    author: intelliqit
+    author: thej
 spec:
   containers:
     - name: myhttpd
@@ -332,7 +332,7 @@ spec:
       targetPort: 80
       nodePort: 30009
   selector:
-    author: intelliqit
+    author: thej
 ```
 
 ```bash
@@ -384,7 +384,7 @@ metadata:
   name: postgres-pod
   labels:
     type: db
-    author: intelliqit
+    author: thej
 spec:
   containers:
     - name: mydb
@@ -406,7 +406,7 @@ spec:
       targetPort: 5432
   selector:
     type: db
-    author: intelliqit
+    author: thej
 ```
 
 > ⚠️ `type` is not mentioned → defaults to **ClusterIP**
@@ -490,14 +490,14 @@ metadata:
   name: postgres-pod
   labels:
     type: db
-    author: intelliqit
+    author: thej
 spec:
   containers:
     - name: mydb
       image: postgres
       env:
         - name: POSTGRES_PASSWORD
-          value: intelliqit
+          value: thej
         - name: POSTGRES_USER
           value: myuser
         - name: POSTGRES_DB
@@ -521,7 +521,7 @@ spec:
       targetPort: 5432
   selector:
     type: db
-    author: intelliqit
+    author: thej
 ```
 
 👉 No `type:` mentioned → **ClusterIP by default**

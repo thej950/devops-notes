@@ -21,7 +21,7 @@ metadata:
   name: voting-app-deployment
   labels:
     name: voting-app
-    author: intelliqit
+    author: thej
 spec:
   replicas: 2
   selector:
@@ -48,7 +48,7 @@ metadata:
   name: result-app-deployment
   labels:
     name: result-app
-    author: intelliqit
+    author: thej
 spec:
   replicas: 2
   selector:
@@ -74,7 +74,7 @@ metadata:
   name: redis-app-deployment
   labels:
     name: redis-app
-    author: intelliqit
+    author: thej
 spec:
   selector:
     matchLabels:
@@ -142,7 +142,7 @@ metadata:
   name: worker-app-deployment
   labels:
     name: worker-app
-    author: intelliqit
+    author: thej
 spec:
   selector:
     matchLabels:
@@ -171,7 +171,7 @@ kind: Service
 metadata:
   name: voting-app-service
   labels:
-    author: intelliqit
+    author: thej
 spec:
   type: LoadBalancer
   ports:
@@ -193,7 +193,7 @@ kind: Service
 metadata:
   name: result-app-service
   labels:
-    author: intelliqit
+    author: thej
 spec:
   type: LoadBalancer
   ports:
@@ -215,7 +215,7 @@ kind: Service
 metadata:
   name: redis-app-service
   labels:
-    author: intelliqit
+    author: thej
 spec:
   ports:
     - targetPort: 6379
@@ -234,7 +234,7 @@ kind: Service
 metadata:
   name: postgres-app-service
   labels:
-    author: intelliqit
+    author: thej
 spec:
   ports:
     - targetPort: 5432
@@ -255,7 +255,7 @@ metadata:
   name: postgres-secret
 type: Opaque
 stringData:
-  password: intelliqit
+  password: thej
   username: myuser
   dbname: mydb
 
@@ -293,7 +293,7 @@ services:
     ports:
       - 5432:5432
     environment:
-      POSTGRES_PASSWORD: intelliqit
+      POSTGRES_PASSWORD: thej
       POSTGRES_USER: myuser
       POSTGRES_DB: mydb
 

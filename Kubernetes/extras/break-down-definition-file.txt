@@ -6,7 +6,7 @@ metadata:
   name: nginx-pod
   labels:
     type: proxy
-    author: intelliqit
+    author: thej
 spec:
   containers:
     - name: mynginx
@@ -21,7 +21,7 @@ metadata: Defines metadata for the Pod object, including the name of the Pod and
 name: nginx-pod: Specifies the name of the Pod object.
 labels: Defines labels for the Pod object, which can be used to filter and group Pods.
 type: proxy: Specifies a label with the key "type" and value "proxy".
-author: intelliqit: Specifies a label with the key "author" and value "intelliqit".
+author: thej: Specifies a label with the key "author" and value "thej".
 spec: Defines the desired state of the Pod object, including its containers.
 containers: Specifies the containers running inside the Pod.
 name: mynginx: Specifies the name of the container.
