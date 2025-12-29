@@ -1,23 +1,17 @@
-![Image](https://framerusercontent.com/images/vaUGygdveWYLMgmXEGhGuLZSDTQ.png?height=501\&width=862)
+## 🧭 NodeAffinity, Taint, Toleration
 
-![Image](https://media.geeksforgeeks.org/wp-content/uploads/20211009185026/Copy3.png)
+- These three are used to **control where Pods run** in a Kubernetes cluster.
 
-![Image](https://www.apptio.com/wp-content/uploads/how-node-affinity-works1.png)
+---
 
-## 🧭 NodeAffinity, Taint, Toleration – Beginner Friendly (Simple English)
+## 1️⃣ NodeAffinity (Pod chooses Node)
 
-![Image](https://www.apptio.com/wp-content/uploads/how-node-affinity-works1.png)
+![Image](https://www.apptio.com/wp-content/uploads/how-node-affinity-works1.png) 
 
 ![Image](https://miro.medium.com/v2/resize%3Afit%3A1200/1%2AcJVojHLbVY4wgEc3W-Ie3g.png)
 
 ![Image](https://media.geeksforgeeks.org/wp-content/uploads/20240506110659/Node-Affinity-In-Kubernetes.webp)
 
-
-These three are used to **control where Pods run** in a Kubernetes cluster.
-
----
-
-## 1️⃣ NodeAffinity (Pod chooses Node)
 
 ### What is NodeAffinity?
 
@@ -255,10 +249,6 @@ Say this clearly:
 > “A taint is applied to a node to repel Pods, allowing only Pods with matching tolerations to be scheduled on that node.”
 
 ---
-
-![Image](https://cdn.prod.website-files.com/635e4ccf77408db6bd802ae6/66e97f5bd21b67ce5de9c0bc_AD_4nXeqCCQ6sJ4RYjGxL7GnqmZXMPJOEkWZ2w91OrHWEBjRmWJRgT4ySmdzI1odcV-YBYxMvNP8j9AYV4lk99UkZ_fd4491rgj5c119k1BDmZwKPgbRbNDBjxMqGzIcHdIb2fE-Dh9pPmfQtamQ5xUx98r-Ewo-.png)
-
-![Image](https://www.densify.com/wp-content/uploads/article-k8s-capacity-taint-tollerations.svg)
 
 ![Image](https://cdn.hashnode.com/res/hashnode/image/upload/v1724868429627/294a6741-5c32-4116-8db8-a2678af0c3d9.png?auto=compress%2Cformat\&format=webp)
 
