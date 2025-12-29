@@ -121,7 +121,9 @@ Examples:
 * Sync MySQL replica copy
 * Sync logs to central server
 
+
 ---
+
 
 # 🧩 SAMPLE CRONJOB TEMPLATE (generic)
 
