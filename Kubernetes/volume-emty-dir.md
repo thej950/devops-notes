@@ -1,8 +1,5 @@
-![Image](https://learncloudnative.com/assets/posts/img/volumes-1.png)
 
-![Image](https://www.devopsschool.com/blog/wp-content/uploads/2019/07/emptydir-hostpath-kubernetes-volume-1.jpg)
-
-## 📦 **emptyDir Volume** in Kubernetes (Beginner Friendly)
+## 📦 **emptyDir Volume** in Kubernetes
 
 ### What is **emptyDir**?
 
@@ -14,6 +11,11 @@
 👉 **Important correction**:
 ❌ Data does **NOT** survive Pod deletion.
 ✅ Data survives **container restarts inside the same Pod**.
+
+![Image](https://learncloudnative.com/assets/posts/img/volumes-1.png)
+
+![Image](https://www.devopsschool.com/blog/wp-content/uploads/2019/07/emptydir-hostpath-kubernetes-volume-1.jpg)
+
 
 ---
 
@@ -101,14 +103,7 @@ Say this clearly:
 > “emptyDir is a temporary Kubernetes volume that shares data between containers in a Pod and survives container restarts but not Pod deletion.”
 
 
-
-![Image](https://yqintl.alicdn.com/f16a8cc4b05e06eb2f7531f4d9ee30dacb7a6f1c.png)
-
-![Image](https://miro.medium.com/v2/resize%3Afit%3A1400/1%2A3mDolkewAxTNog9nY6Es6Q.gif)
-
-![Image](https://miro.medium.com/1%2AhYuhPT326a55b4Vf7LkJJQ.png)
-
-## 📦 **emptyDir vs hostPath vs PVC** (Beginner Friendly – Simple English)
+## 📦 **emptyDir vs hostPath vs PVC**
 
 These are **Kubernetes volume types**.
 They decide **where data is stored** and **how long it lives**.
