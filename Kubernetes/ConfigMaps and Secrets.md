@@ -4,6 +4,9 @@
 
 ![Image](https://drek4537l1klr.cloudfront.net/luksa/Figures/07fig02.jpg)
 
+![Image](https://miro.medium.com/v2/resize%3Afit%3A1400/1%2ATxFP9sw9T_Me_UfTvT8eEw.png)
+
+
 # 📦 ConfigMaps (Simple Explanation)
 
 ### What is a ConfigMap?
@@ -134,6 +137,76 @@ data:
 * Allows Pods to talk to **Kubernetes API Server**
 
 ---
+
+### Simple meaning
+
+* A **Secret** is used to store **sensitive data** in Kubernetes.
+* Examples:
+
+  * Passwords
+  * Database credentials
+  * API keys
+  * Tokens
+  * TLS certificates
+
+👉 Secrets keep **important data safe** and **out of Pod YAML files**.
+
+---
+### Why do we use Secrets?
+
+* To **avoid hard-coding passwords** in code or YAML.
+* To **secure sensitive information**.
+* To easily **change passwords** without changing application code.
+
+---
+
+### How Secrets are stored
+
+* Secrets are stored in **etcd** (Kubernetes database).
+* They are **Base64 encoded**.
+* Access is controlled using **RBAC**.
+
+---
+
+
+### How Pods use Secrets
+
+Secrets can be used in **two ways**:
+
+1. As **environment variables**
+2. As **files mounted inside the container**
+
+---
+
+### Example: Secret YAML
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: db-secret
+type: Opaque
+data:
+  username: YWRtaW4=
+  password: cGFzc3dvcmQ=
+```
+
+⚠️ Values are Base64 encoded, not plain text.
+
+---
+
+### Using Secret in a Pod
+
+```yaml
+env:
+- name: DB_USER
+  valueFrom:
+    secretKeyRef:
+      name: db-secret
+      key: username
+```
+
+
 
 ### 🧠 Secret Analogy (Interview Gold ⭐)
 
