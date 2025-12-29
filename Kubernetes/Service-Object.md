@@ -1,9 +1,5 @@
 ![Image](https://assets.bytebytego.com/diagrams/0005-4-k8s-service-types.png)
 
-![Image](https://media.licdn.com/dms/image/v2/D5612AQG2GN5LJxQ6Ag/article-cover_image-shrink_720_1280/B56Zebl3ykHQAM-/0/1750662096056?e=2147483647\&t=Rjeyjxkml4ziT2h25zNNeA4bB8n2LoOav8C4x0NRCZQ\&v=beta)
-
-![Image](https://www.apptio.com/wp-content/uploads/kubernetes-labels1.png)
-
 ## 🌐 What is a **Service** in Kubernetes?
 
 ### Simple meaning
@@ -100,10 +96,6 @@ Say this clearly:
 
 
 ![Image](https://zesty.co/wp-content/uploads/2025/02/nodeport.png)
-
-![Image](https://miro.medium.com/v2/resize%3Afit%3A1400/1%2ACdyUtG-8CfGu2oFC5s0KwA.png)
-
-![Image](https://media.geeksforgeeks.org/wp-content/uploads/20230914170518/NodePort-service.png)
 
 ## 🌐 NodePort Service in Kubernetes (Beginner Friendly – Simple English)
 
@@ -272,13 +264,8 @@ Say this clearly:
 
 > “NodePort exposes a Kubernetes service on a fixed port across all nodes, enabling external access and basic network load balancing.”
 
-
-
-![Image](https://www.densify.com/wp-content/uploads/article-k8s-capacity-kubernetes-service-overview.svg)
-
 ![Image](https://zesty.co/wp-content/uploads/2025/02/clusterIP.png)
 
-![Image](https://i.sstatic.net/1lunW.png)
 
 ## 🌐 LoadBalancer & ClusterIP in Kubernetes (Beginner Friendly – Simple English)
 
@@ -459,10 +446,6 @@ Say this confidently:
 > “LoadBalancer exposes applications using a public IP in managed Kubernetes, while ClusterIP is used for internal-only services inside the cluster.”
 
 ![Image](https://cdn.prod.website-files.com/6340354625974824cde2e195/65c58f53394cda977ad1d540_GIF_5.gif)
-
-![Image](https://zesty.co/wp-content/uploads/2025/02/clusterIP.png)
-
-![Image](https://kodekloud.com/kk-media/image/upload/v1752884969/notes-assets/images/Kubernetes-for-the-Absolute-Beginners-Hands-on-Tutorial-Services-ClusterIP/frame_120.jpg)
 
 ## 🟢 ClusterIP in Kubernetes (Beginner Friendly – Simple English)
 
