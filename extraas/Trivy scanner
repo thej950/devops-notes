@@ -1,0 +1,259 @@
+Below is a **clean, professional, interview-ready version** of your Trivy content.
+Written like **real production documentation + DevOps interview notes (4+ yrs experience)**, in **simple English**.
+
+![Image](https://devopscube.com/content/images/2025/03/trivy-blog-image-1.gif)
+
+![Image](https://k21academy.com/wp-content/uploads/2021/04/Screenshot-from-2021-04-14-19-33-00.png)
+
+![Image](https://media2.dev.to/dynamic/image/width%3D1600%2Cheight%3D900%2Cfit%3Dcover%2Cgravity%3Dauto%2Cformat%3Dauto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fkxykad3xg0a798cr3w97.png)
+
+![Image](https://cdn.prod.website-files.com/681e366f54a6e3ce87159ca4/68b758d39a55274dac714d04_6877c6c7cebe9e2ae78b2770_12-Container-image-scanning-best-practices_01-image-scanning-workflow.png)
+
+---
+
+## 🔐 Trivy Vulnerability Scanner – Documentation
+
+### 🔹 What is Trivy?
+
+**Trivy** is a **simple and powerful vulnerability scanner** used to scan:
+
+* Docker images
+* File systems
+* Git repositories
+* Infrastructure as Code (IaC)
+
+It detects **OS packages, application dependencies, and configuration issues** before deployment.
+
+---
+
+## 🔹 Why Docker Image Scanning is Important
+
+Docker vulnerability scanning is the process of **identifying security vulnerabilities** in packages used inside a container image.
+
+* Images may contain **outdated or vulnerable libraries**
+* One vulnerable package can **bypass all other security controls**
+* Trivy helps **detect and fix issues early** (shift-left security)
+* Prevents **production breaches and data exposure**
+
+---
+
+## 🔹 What Trivy Can Scan
+
+* Container images (Docker, OCI)
+* Dockerfiles (misconfigurations)
+* Kubernetes YAML files
+* Terraform (IaC)
+* Git repositories
+* File systems
+
+---
+
+## 🔹 Trivy Architecture (High Level)
+
+1. Pull image locally
+2. Trivy checks OS & app packages
+3. Matches CVEs from vulnerability DB
+4. Generates severity-based report
+
+---
+
+## 🔹 Practical – Image Scanning (Docker Host)
+
+### Step 1️⃣ Pull Trivy Image
+
+```bash
+docker pull aquasec/trivy
+```
+
+### Step 2️⃣ Verify Trivy
+
+```bash
+docker run --rm aquasec/trivy
+```
+
+---
+
+## 🔹 Scan Docker Images (Image Must Be Local)
+
+### Example 1: Scan Ubuntu Image
+
+```bash
+docker run --rm aquasec/trivy image ubuntu:18.04
+```
+
+### Example 2: Scan bWAPP Image
+
+```bash
+docker pull hackersploit/bwapp-docker
+docker run --rm aquasec/trivy image hackersploit/bwapp-docker
+```
+
+### Example 3: Scan Custom Image
+
+```bash
+docker run --rm aquasec/trivy image navathej408/mysuperapp
+```
+
+---
+
+## 🔹 Trivy Cache (Recommended)
+
+```bash
+docker run --rm \
+  -v trivy-cache:/root/.cache \
+  aquasec/trivy image hackersploit/bwapp-docker
+```
+
+---
+
+## 🔹 Jenkins CI/CD Integration (Security Stage)
+
+```groovy
+stage("Scan Image using Trivy") {
+    steps {
+        script {
+            sh 'docker pull aquasec/trivy'
+            sh 'docker run --rm aquasec/trivy image ${IMAGE_NAME}'
+        }
+    }
+}
+```
+
+➡ This ensures **vulnerabilities are detected before deployment**.
+
+---
+
+## 🔹 Severity Levels Trivy Reports
+
+* LOW
+* MEDIUM
+* HIGH
+* CRITICAL
+
+👉 In production, we **fail the pipeline on HIGH & CRITICAL**.
+
+---
+
+## 🔹 Official Trivy Repository
+
+* GitHub: [https://github.com/aquasecurity/trivy](https://github.com/aquasecurity/trivy)
+
+---
+
+## 🎯 Interview Tip
+
+👉 **Say this in interviews:**
+
+> “We integrated Trivy into Jenkins pipeline to block deployments if critical vulnerabilities are found, following shift-left security.”
+
+---
+
+## 🔐 Trivy in CI/CD (Jenkins + GitHub Actions)
+
+### 🔹 Why Trivy in Pipeline?
+
+* Scan Docker images **before deployment**
+* Stop vulnerable images from going to **prod**
+* Follow **Shift-Left Security**
+* Mandatory in real-time projects
+
+---
+
+## ✅ Jenkins + Trivy Pipeline
+
+### 🔹 Jenkinsfile (Docker Image Scan)
+
+```groovy
+stage("Trivy Image Scan") {
+    steps {
+        script {
+            sh 'docker pull aquasec/trivy'
+            sh '''
+              docker run --rm \
+              aquasec/trivy image \
+              --severity HIGH,CRITICAL \
+              --exit-code 1 \
+              ${IMAGE_NAME}
+            '''
+        }
+    }
+}
+```
+
+### 🔹 Jenkins Flow
+
+1. Code pushed to GitHub
+2. Jenkins builds Docker image
+3. Trivy scans image
+4. Pipeline **fails on HIGH/CRITICAL**
+5. Only safe image is deployed
+
+---
+
+## ✅ GitHub Actions + Trivy Pipeline
+
+### 🔹 `.github/workflows/trivy.yml`
+
+```yaml
+name: Trivy Image Scan
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  trivy-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Build Docker Image
+        run: docker build -t myapp:latest .
+
+      - name: Trivy Scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: myapp:latest
+          severity: HIGH,CRITICAL
+          exit-code: 1
+```
+
+---
+
+## 🔹 GitHub Actions Flow
+
+1. Developer pushes code
+2. GitHub Actions builds image
+3. Trivy scans image
+4. Workflow fails if vulnerabilities found
+5. Secure image only moves forward
+
+---
+
+## 🔁 Jenkins vs GitHub Actions (Quick)
+
+| Jenkins              | GitHub Actions |
+| -------------------- | -------------- |
+| Self-hosted          | GitHub managed |
+| More control         | Easy setup     |
+| Enterprise pipelines | Repo-level CI  |
+| Heavy infra          | Lightweight    |
+
+---
+
+## 🔥 Real-Time Usage
+
+* Jenkins → Enterprise CI/CD
+* GitHub Actions → Open-source & fast
+* Trivy → Security gate for both
+
+---
+
+## 🎯 Interview Tip
+
+👉 **Say this:**
+
+> “We used Trivy in both Jenkins and GitHub Actions pipelines to block images with critical vulnerabilities before Kubernetes deployment.”
+
