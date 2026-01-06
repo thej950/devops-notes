@@ -4,7 +4,7 @@
 
 ![Image](https://k21academy.com/wp-content/uploads/2024/06/CPT2406212146-899x675-1.gif)
 
-## 🔁 Horizontal Pod Autoscaler (HPA) – Beginner Friendly
+## 🔁 Horizontal Pod Autoscaler (HPA)
 
 ### What is HPA?
 

@@ -215,8 +215,8 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,TAINTS:.spec.taints
 
 ### Add taint and Remove Taint on node 
 ```bash
-kubectl taint node id_machine slave2=intelliit2:NoShedule  # it will add 
-kubectl taint nodes id_machine slave2=intellit2:NoShedule- # it will remove 
+kubectl taint node id_machine slave2=thej2:NoShedule  # it will add 
+kubectl taint nodes id_machine slave2=thej2:NoShedule- # it will remove 
 ```
 
 

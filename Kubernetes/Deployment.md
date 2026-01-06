@@ -124,7 +124,7 @@ replaces absent ones, and upgrades syllabus smoothly.
 
 ---
 
-## 🆚 Deployment vs StatefulSet (Easy Table)
+## 🆚 Deployment vs StatefulSet 
 
 | Feature   | Deployment        | StatefulSet          |
 | --------- | ----------------- | -------------------- |
@@ -137,7 +137,7 @@ replaces absent ones, and upgrades syllabus smoothly.
 
 ---
 
-## 🧠 Super Easy Analogy (Interview Gold ⭐)
+## 🧠 Super Easy Analogy 
 
 * **Deployment** = Food delivery riders
 
@@ -306,9 +306,6 @@ kubectl scale deployment nginx-deployment --replicas=5
 
   * Each customer has **fixed account number**
   * Data must never mix
-
-👉 If **identity + data matters** → StatefulSet
-👉 If **speed + scale matters** → Deployment
 
 ---
 

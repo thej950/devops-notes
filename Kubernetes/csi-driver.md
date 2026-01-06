@@ -1,6 +1,6 @@
 ![Image](https://us1.discourse-cdn.com/flex016/uploads/kubernetes/optimized/2X/1/11e56624b12ec6f3c181a59fbd34e492ad9ae342_2_690x388.png)
 
-## 💾 What is a **Storage Driver** in Kubernetes? (Beginner Friendly)
+## 💾 What is a **Storage Driver** in Kubernetes?
 
 ### Simple meaning
 
@@ -95,7 +95,7 @@ Say this clearly:
 > “A storage driver in Kubernetes enables Pods to create, attach, and use persistent storage by connecting Kubernetes with external storage systems.”
 
 
-## 💾 What is **CSI Driver** in Kubernetes? (Beginner Friendly)
+## 💾 What is **CSI Driver** in Kubernetes?
 
 ### Simple meaning
 

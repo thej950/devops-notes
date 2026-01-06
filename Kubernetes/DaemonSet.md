@@ -1,8 +1,6 @@
-![Image](https://www.bluematador.com/hs-fs/hubfs/blog/new/An%20Introduction%20to%20Kubernetes%20DaemonSets/DaemonSets.png?name=DaemonSets.png\&width=770)
-
 ![Image](https://devopscube.com/content/images/2025/03/daemonset-explained-1.png)
 
-## 🔁 DaemonSet in Kubernetes (Beginner Friendly)
+## 🔁 DaemonSet in Kubernetes
 
 ### What is a DaemonSet?
 

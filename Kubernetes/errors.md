@@ -1,4 +1,4 @@
-## 📌 Main Points
+# 📌 Main Points
 
 ### 1. **Pod & Container Failures**
 - Common errors: `CrashLoopBackOff`, `RunContainerError`, `OOMKilled`.  
@@ -52,7 +52,7 @@
 
 ---
 
-## 🎯 Key Takeaway
+### 🎯 Key Takeaway
 This document is a **Kubernetes troubleshooting handbook**:  
 - Maps **errors → root causes → fixes**.  
 - Emphasizes checking logs/configs first.  
@@ -67,9 +67,7 @@ This document is a **Kubernetes troubleshooting handbook**:
 
 ![Image](https://cdn.prod.website-files.com/681e366f54a6e3ce87159ca4/68757f9e61edb27b795c9588_What-is-Crashloopbackoff-02.png)
 
-![Image](https://cdn.prod.website-files.com/626a25d633b1b99aa0e1afa7/66c75301ed5f21b4964b2222_66605bf55baf12fc3fd551e6_image1.png)
-
-## 🔁 CrashLoopBackOff
+# 1. 🔁 CrashLoopBackOff
 
 ### What is CrashLoopBackOff?
 
@@ -81,7 +79,7 @@ This document is a **Kubernetes troubleshooting handbook**:
 
 ---
 
-### Why does CrashLoopBackOff happen? (Common Reasons)
+#### Why does CrashLoopBackOff happen? (Common Reasons)
 
 * Wrong **command or entrypoint**
 * Application **crashes at startup**
@@ -140,6 +138,15 @@ That is **CrashLoopBackOff** 📱
 
 ---
 
+### Why CrashLoopBackOff happens?
+
+* Wrong command / entrypoint
+* Missing environment variables
+* App fails to start
+* DB connection failure
+* Wrong image
+
+
 ### How to fix it (Basic Steps)
 
 * Check **logs**
@@ -156,7 +163,7 @@ That is **CrashLoopBackOff** 📱
 
 ---
 
-## ⭐ Interview Tip
+### ⭐ Interview Tip
 
 Say this clearly:
 
@@ -166,7 +173,7 @@ Say this clearly:
 
 ![Image](https://miro.medium.com/1%2Ak1AllMAcwtEJiA0gTgMC7Q.png)
 
-## 🔴 What is **OOMKilled**?
+# 2. 🔴 What is **OOMKilled**?
 
 * **OOMKilled** means **Out Of Memory Killed**.
 * Container used **more memory than its limit**.
@@ -184,24 +191,7 @@ Limit = 128Mi, App uses = 200Mi → **OOMKilled**
 
 ---
 
-## 🔴 What is **CrashLoopBackOff**?
-
-* **CrashLoopBackOff** means container **keeps crashing and restarting**.
-* Kubernetes restarts the container again and again.
-* After many failures, Kubernetes **slows down restarts**.
-* It is an **application/config problem**.
-
-### Why CrashLoopBackOff happens?
-
-* Wrong command / entrypoint
-* Missing environment variables
-* App fails to start
-* DB connection failure
-* Wrong image
-
----
-
-## 🆚 OOMKilled vs CrashLoopBackOff (Clear Table)
+### 🆚 OOMKilled vs CrashLoopBackOff (Clear Table)
 
 | Feature             | OOMKilled             | CrashLoopBackOff            |
 | ------------------- | --------------------- | --------------------------- |
@@ -213,7 +203,7 @@ Limit = 128Mi, App uses = 200Mi → **OOMKilled**
 
 ---
 
-## 🧠 Very Easy Analogy (Interview Gold ⭐)
+### 🧠 Very Easy Analogy (Interview Gold ⭐)
 
 * **OOMKilled** = Phone battery full usage 🔋
 
@@ -228,7 +218,7 @@ Limit = 128Mi, App uses = 200Mi → **OOMKilled**
 
 ---
 
-## 🔧 How to Troubleshoot
+### 🔧 How to Troubleshoot
 
 ### For OOMKilled:
 
@@ -253,33 +243,26 @@ kubectl describe pod <pod-name>
 
 ---
 
-## 🔑 One-Line Difference (Easy to Remember)
+### 🔑 One-Line Difference (Easy to Remember)
 
 * **OOMKilled** → memory exceeded
 * **CrashLoopBackOff** → app keeps crashing
 
 ---
 
-## ⭐ Interview Tip
+### ⭐ Interview Tip
 
 Say this clearly:
 
 > “OOMKilled happens when a container exceeds its memory limit, while CrashLoopBackOff happens when a container repeatedly crashes during startup.”
 
-
-
-
-![Image](https://cdn.prod.website-files.com/681e366f54a6e3ce87159ca4/688696e04f10b7c29819b672_ErrImagePull-ImagePullbackOff-00.png)
-
-![Image](https://bobcares.com/wp-content/uploads/2025/04/66.-Why-Invalid-Capacity-0-on-Image-Filesystem-in-Kubernetes_.png)
-
-## 🚫 `ImagePullBackOff`, `ErrImagePull`, `InvalidImageName`
+# 🚫 `ImagePullBackOff`, `ErrImagePull`, `InvalidImageName`
 
 These errors mean **Kubernetes cannot download the container image**.
 
 ---
 
-## 🔴 `ErrImagePull`
+## 1. 🔴 `ErrImagePull`
 
 ### What it means
 
@@ -299,7 +282,7 @@ kubectl describe pod <pod-name>
 
 ---
 
-## 🔴 `ImagePullBackOff`
+## 2. 🔴 `ImagePullBackOff`
 
 ### What it means
 
@@ -312,7 +295,7 @@ kubectl describe pod <pod-name>
 
 ---
 
-## 🔴 `InvalidImageName`
+## 3. 🔴 `InvalidImageName`
 
 ### What it means
 
@@ -327,7 +310,7 @@ kubectl describe pod <pod-name>
 
 ---
 
-## 🧠 Very Easy Analogy (Interview Gold ⭐)
+### 🧠 Very Easy Analogy (Interview Gold ⭐)
 
 * **Kubernetes** = Zomato delivery app
 * **Image** = Food item
@@ -338,7 +321,7 @@ kubectl describe pod <pod-name>
 
 ---
 
-## 🆚 Quick Comparison Table
+### 🆚 Quick Comparison Table
 
 | Error            | Meaning                 |
 | ---------------- | ----------------------- |
@@ -348,7 +331,7 @@ kubectl describe pod <pod-name>
 
 ---
 
-## 🔧 How to Fix (Quick Steps)
+### 🔧 How to Fix (Quick Steps)
 
 1. Check image name and tag
 2. Try `docker pull <image>`
@@ -358,7 +341,7 @@ kubectl describe pod <pod-name>
 
 ---
 
-## 🔑 One-Line Summary
+### 🔑 One-Line Summary
 
 * **InvalidImageName** → wrong image format
 * **ErrImagePull** → failed to download image
@@ -366,21 +349,19 @@ kubectl describe pod <pod-name>
 
 ---
 
-## ⭐ Interview Tip
+### ⭐ Interview Tip
 
 Say this clearly:
 
 > “ErrImagePull means image download failed, ImagePullBackOff means Kubernetes is retrying with delay, and InvalidImageName means the image name itself is wrong.”
 
-![Image](https://cast.ai/wp-content/uploads/2023/03/DES-375-Kubernetes-ConfigMap-META-2.png)
-
-## ❌ Errors: **invalid env/config**, **missing ConfigMap / Secret**
+# ❌ Errors: **invalid env/config**, **missing ConfigMap / Secret**
 
 These errors happen when a Pod **expects configuration**, but Kubernetes **can’t find it or it’s wrong**.
 
 ---
 
-## 🔴 Invalid env / config
+## 1. 🔴 Invalid env / config
 
 ### What it means
 
@@ -408,7 +389,7 @@ kubectl describe pod <pod-name>
 
 ---
 
-## 🔴 Missing ConfigMap
+## 2. 🔴 Missing ConfigMap
 
 ### What it means
 
@@ -434,7 +415,7 @@ kubectl get configmap -n <namespace>
 
 ---
 
-## 🔴 Missing Secret
+## 3. 🔴 Missing Secret
 
 ### What it means
 
@@ -460,7 +441,7 @@ kubectl get secret -n <namespace>
 
 ---
 
-## 🧠 Very Easy Analogy (Interview Gold ⭐)
+### 🧠 Very Easy Analogy (Interview Gold ⭐)
 
 * **Application** = Person
 * **ConfigMap** = Instructions paper 📄
@@ -472,7 +453,7 @@ kubectl get secret -n <namespace>
 
 ---
 
-## 🧪 Quick YAML Example (Env from ConfigMap/Secret)
+### 🧪 Quick YAML Example (Env from ConfigMap/Secret)
 
 ```yaml
 env:
@@ -490,7 +471,7 @@ env:
 
 ---
 
-## 🔧 Troubleshooting Checklist
+### 🔧 Troubleshooting Checklist
 
 1. Check Pod events: `kubectl describe pod`
 2. Verify names and keys (case-sensitive)
@@ -500,14 +481,14 @@ env:
 
 ---
 
-## 🔑 One-Line Summary
+### 🔑 One-Line Summary
 
 * **Invalid env/config** → wrong or missing values
 * **Missing ConfigMap/Secret** → referenced object not found
 
 ---
 
-## ⭐ Interview Tip
+### ⭐ Interview Tip
 
 Say this clearly:
 
@@ -520,13 +501,13 @@ Say this clearly:
 
 ![Image](https://labs.iximiuz.com/content/files/challenges/kubernetes-pod-debugging-part-1-ae00ba45/__static__/pod-lifecycle.png)
 
-## ❌ `PodUnschedulable`, `FailedScheduling`, `NodeNotReady`
+# ❌ `PodUnschedulable`, `FailedScheduling`, `NodeNotReady`
 
 These errors mean **Kubernetes cannot place a Pod on any node** or **nodes are not healthy**.
 
 ---
 
-## 🔴 `FailedScheduling`
+## 1. 🔴 `FailedScheduling`
 
 ### What it means
 
@@ -549,7 +530,7 @@ kubectl get nodes
 
 ---
 
-## 🔴 `PodUnschedulable`
+## 2. 🔴 `PodUnschedulable`
 
 ### What it means
 
@@ -560,7 +541,7 @@ kubectl get nodes
 
 ---
 
-## 🔴 `NodeNotReady`
+## 3. 🔴 `NodeNotReady`
 
 ### What it means
 
@@ -583,7 +564,7 @@ kubectl describe node <node-name>
 
 ---
 
-## 🧠 Very Easy Analogy (Interview Gold ⭐)
+### 🧠 Very Easy Analogy (Interview Gold ⭐)
 
 * **Pods** = Passengers
 * **Nodes** = Buses 🚌
@@ -594,7 +575,7 @@ kubectl describe node <node-name>
 
 ---
 
-## 🆚 Quick Comparison Table
+### 🆚 Quick Comparison Table
 
 | Error            | Meaning                    |
 | ---------------- | -------------------------- |
@@ -604,7 +585,7 @@ kubectl describe node <node-name>
 
 ---
 
-## 🔧 How to Fix (Quick Steps)
+### 🔧 How to Fix (Quick Steps)
 
 1. Check node status (`kubectl get nodes`)
 2. Reduce resource requests
@@ -615,7 +596,7 @@ kubectl describe node <node-name>
 
 ---
 
-## 🔑 One-Line Summary
+### 🔑 One-Line Summary
 
 * **FailedScheduling** → scheduler can’t place Pod
 * **PodUnschedulable** → Pod waiting to be scheduled
@@ -623,29 +604,21 @@ kubectl describe node <node-name>
 
 ---
 
-## ⭐ Interview Tip
+### ⭐ Interview Tip
 
 Say this clearly:
 
 > “These errors indicate scheduling issues where either no suitable node is available or the node itself is not in a ready state.”
 
 
-
-
-
-![Image](https://docs.bitnami.com/images/img/platforms/kubernetes/troubleshoot-kubernetes-deployments-3.png)
-
-![Image](https://miro.medium.com/v2/resize%3Afit%3A1400/1%2ARgPX1GoSgJf2FW9wjEL8NA.png)
-
-
-## ❌ `PVC Pending`, `VolumeMountError`, `Multi-Attach error`
+# ❌ `PVC Pending`, `VolumeMountError`, `Multi-Attach error`
 
 
 These errors are related to **storage (Persistent Volumes)** in Kubernetes.
 
 ---
 
-## 🔴 `PVC Pending`
+## 1. 🔴 `PVC Pending`
 
 ### What it means
 
@@ -669,7 +642,7 @@ kubectl describe pvc <pvc-name>
 
 ---
 
-## 🔴 `VolumeMountError`
+## 2. 🔴 `VolumeMountError`
 
 ### What it means
 
@@ -696,7 +669,7 @@ kubectl get events
 
 ---
 
-## 🔴 `Multi-Attach error`
+## 3. 🔴 `Multi-Attach error`
 
 ### What it means
 
@@ -714,7 +687,7 @@ kubectl get events
 
 ---
 
-## 🧠 Very Easy Analogy (Interview Gold ⭐)
+### 🧠 Very Easy Analogy (Interview Gold ⭐)
 
 * **PVC** = Parking request 🚗
 * **PV** = Parking slot
@@ -725,7 +698,7 @@ kubectl get events
 
 ---
 
-## 🆚 Quick Comparison Table
+### 🆚 Quick Comparison Table
 
 | Error              | Meaning                       |
 | ------------------ | ----------------------------- |
@@ -735,7 +708,7 @@ kubectl get events
 
 ---
 
-## 🔧 How to Fix (Quick Steps)
+### 🔧 How to Fix (Quick Steps)
 
 1. Create correct PV or StorageClass
 2. Match PVC size and access mode
@@ -745,7 +718,7 @@ kubectl get events
 
 ---
 
-## 🔑 One-Line Summary
+### 🔑 One-Line Summary
 
 * **PVC Pending** → waiting for storage
 * **VolumeMountError** → storage mount failed
@@ -753,30 +726,15 @@ kubectl get events
 
 ---
 
-## ⭐ Interview Tip
+### ⭐ Interview Tip
 
 Say this clearly:
 
 > “These errors occur due to storage issues like missing volumes, mount failures, or attaching the same volume to multiple Pods.”
 
+# 🌐 Networking Errors
 
-![Image](https://supportfly.io/wp-content/uploads/2024/06/How-to-Fix-kubernetes-cluster-unreachable-Error-scaled.webp)
-
-![Image](https://i.sstatic.net/oC4g5.png)
-
-![Image](https://trilio.io/wp-content/uploads/2025/01/image1-1.png)
-
-![Image](https://supportfly.io/wp-content/uploads/2024/05/Kubernetes-Pods-stuck-in-Terminating-status-scaled.webp)
-
-![Image](https://www.apptio.com/wp-content/uploads/hpa-autoscaling.png)
-
-## ❌ Common Kubernetes Errors 
-
----
-
-## 🌐 Networking Errors
-
-### 🔴 Service Unreachable
+## 1. 🔴 Service Unreachable
 
 **What it means**
 
@@ -798,7 +756,7 @@ kubectl describe svc <svc-name>
 
 ---
 
-### 🔴 DNS Resolution Failed
+## 2. 🔴 DNS Resolution Failed
 
 **What it means**
 
@@ -819,7 +777,7 @@ kubectl logs -n kube-system deploy/coredns
 
 ---
 
-### 🔴 Ingress 404
+## 3. 🔴 Ingress 404
 
 **What it means**
 
@@ -841,9 +799,9 @@ kubectl get pods -n ingress-nginx
 
 ---
 
-## 🔐 Security / Access Errors
+# 🔐 Security / Access Errors
 
-### 🔴 RBAC Denied / Unauthorized
+### 1. 🔴 RBAC Denied / Unauthorized
 
 **What it means**
 
@@ -863,7 +821,7 @@ kubectl describe rolebinding
 
 ---
 
-### 🔴 PodSecurityPolicy Violation
+### 2. 🔴 PodSecurityPolicy Violation
 
 **What it means**
 
@@ -882,9 +840,9 @@ kubectl describe rolebinding
 
 ---
 
-## 🚀 Deployment / Scaling / Helm Errors
+# 🚀 Deployment / Scaling / Helm Errors
 
-### 🔴 Rollout Stuck
+### 1. 🔴 Rollout Stuck
 
 **What it means**
 
@@ -905,7 +863,7 @@ kubectl describe deploy <name>
 
 ---
 
-### 🔴 HPA Not Scaling
+### 2. 🔴 HPA Not Scaling
 
 **What it means**
 
@@ -926,7 +884,7 @@ kubectl top pods
 
 ---
 
-### 🔴 Helm Release Failed
+### 3. 🔴 Helm Release Failed
 
 **What it means**
 
@@ -949,7 +907,7 @@ helm install --debug --dry-run
 
 ---
 
-## 🧠 Super Easy Analogy (Interview Gold ⭐)
+### 🧠 Super Easy Analogy (Interview Gold ⭐)
 
 * **Service unreachable** → Phone number correct, phone switched off 📵
 * **DNS failed** → Name not in contacts 📒
@@ -961,7 +919,7 @@ helm install --debug --dry-run
 
 ---
 
-## 🔑 One-Line Summary
+### 🔑 One-Line Summary
 
 * Network errors → traffic/DNS/Ingress issues
 * Security errors → permission/policy issues
@@ -969,7 +927,7 @@ helm install --debug --dry-run
 
 ---
 
-## ⭐ Interview Tip
+### ⭐ Interview Tip
 
 Say this clearly:
 
