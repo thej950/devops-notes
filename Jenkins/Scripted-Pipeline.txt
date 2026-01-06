@@ -1,109 +1,316 @@
-Pipeline as Code
-=====================
-This is the process of implementing all the stages of CI-CD
-from the level of a Groovy script file called as the Jenkinsfile
+# 🚀 Pipeline as Code
 
-Advantages
-================
-1 Since this is a code it can be uploaded into git and all the
-team members can review and edit the code and still git will 
-maintain multiple versions and we can decide what version to use
+---
 
-2 Jenkinsfiles can withstand planned and unplanned restart of the 
-Jenkins master
+## 📌 What is Pipeline as Code?
 
-3 They can perform all stages of ci-cd with minimum no of plugins
-so they are more faster and secure
+**Pipeline as Code** means:
 
-4 We can hanlde real world challanges like if conditions,loops
-  exception handling etc.ie if a stage in ci-cd passes we want 
-to execute some steps and it fails we want to execute some other
-steps
+* We write the **entire CI-CD process as code**
+* This code is written in a file called **Jenkinsfile**
+* Jenkins reads this file and runs the steps automatically
 
-=======================================================================
-Pipeline as code can be implemented in 2 ways
-1 Scripted Pipeline
-2 Declarative Pipeline
+👉 Instead of clicking buttons in Jenkins UI, we **write instructions in code**.
 
-Syntax of Scripted Pipeline
-================================
-node('built-in')
-{
-   stage('Stage name in ci-cd')
-   {
-     Groovy code to implement this stage
-   }
+---
+
+## 🧠 Real-Life Analogy
+
+📜 **Recipe book**
+
+* Recipe = Jenkinsfile
+* Steps = CI-CD stages
+* Chef = Jenkins
+
+If recipe is written, anyone can cook the same dish again.
+
+---
+
+## 🔁 What does Pipeline as Code do?
+
+It automates **all CI-CD stages**, such as:
+
+* Download code
+* Build code
+* Test code
+* Deploy to QA
+* Deploy to Production (after approval)
+
+All written in **one file**.
+
+---
+
+## ✅ Advantages of Pipeline as Code (Simple)
+
+---
+
+### 1️⃣ Stored in Git
+
+* Jenkinsfile is code
+* It is stored in **Git repository**
+* Team members can review and update it
+* Git keeps **history and versions**
+
+🧠 Analogy
+📂 Google Docs with version history
+
+---
+
+### 2️⃣ Survives Jenkins Restart
+
+* Even if Jenkins restarts
+* Pipeline will **not be lost**
+
+🧠 Analogy
+💾 Saving file before power cut
+
+---
+
+### 3️⃣ Fewer Plugins Needed
+
+* Pipeline handles most logic
+* Less dependency on plugins
+* More **secure and faster**
+
+🧠 Analogy
+📱 Fewer apps → faster phone
+
+---
+
+### 4️⃣ Handles Real-World Logic
+
+Pipeline can handle:
+
+* if / else conditions
+* loops
+* error handling
+* approval steps
+
+🧠 Analogy
+🤖 Smart machine that reacts to success or failure
+
+---
+
+## 🛠 Two Types of Pipeline as Code
+
+---
+
+## 1️⃣ Scripted Pipeline
+
+* Older style
+* Written fully in Groovy
+* More flexible
+* Little complex for beginners
+
+### Basic Syntax (Simple)
+
+```groovy
+node('built-in') {
+  stage('Stage Name') {
+    // Code for this stage
+  }
 }
+```
 
-Syntax of Declarative Pipeline
-===================================
-pipeline
-{
+🧠 Analogy
+🚗 Manual car (more control)
+
+---
+
+## 2️⃣ Declarative Pipeline
+
+* Newer style
+* Structured and clean
+* Easy to read
+* Recommended for beginners
+
+### Basic Syntax
+
+```groovy
+pipeline {
   agent any
-  stages
-  {
-    stage('Stage name in CI-CD')
-    {
-      steps
-      {
-         Groovy code to implement this stage
+  stages {
+    stage('Stage Name') {
+      steps {
+        // Code for this stage
       }
     }
   }
 }
-=================================================================================
-Scripted Pipeline
-========================
-1 Go to the dashboard of jenkins
-2 Click on New item
-3 Enter item name as "ScriptedPipeline"
-4 Select Pipeline--->Click on OK
+```
 
-==============================================================================================
-node('built-in')
-{
-    stage('ContinuousDownload')
-    {
-        git 'https://github.com/intelliqittrainings/maven.git'
+🧠 Analogy
+🚘 Automatic car (easy to drive)
+
+---
+
+## 🧪 Scripted Pipeline – Job Creation Steps
+
+1️⃣ Open Jenkins Dashboard
+2️⃣ Click **New Item**
+3️⃣ Enter name: `ScriptedPipeline`
+4️⃣ Select **Pipeline**
+5️⃣ Click **OK**
+
+---
+
+## 🧩 Real Project Scripted Pipeline Example (Explained)
+
+### 📄 Jenkinsfile (Scripted Pipeline)
+
+```groovy
+node('built-in') {
+
+    stage('ContinuousDownload') {
+        git 'https://github.com/thej950/maven.git'
     }
-    stage('ContinuousBuild')
-    {
+
+    stage('ContinuousBuild') {
         sh 'mvn package'
     }
-    stage('ContinuousDeployment')
-    {
-       deploy adapters: [tomcat9(credentialsId: '8cc7d40a-bab0-438d-8dc2-f0d886815228', path: '', url: 'http://172.31.16.84:8080')], contextPath: 'testapp', war: '**/*.war'
-    }
-    stage('ContinuousTesting')
-    {
-        git 'https://github.com/intelliqittrainings/FunctionalTesting.git'
-        sh 'java -jar /home/ubuntu/.jenkins/workspace/ScriptedPipeline/testing.jar'
-    }
-    stage('ContinuousDelivery')
-    {
-        input message: 'Need approvals from the DM!', submitter: 'srinivas'
-        deploy adapters: [tomcat9(credentialsId: '8cc7d40a-bab0-438d-8dc2-f0d886815228', path: '', url: 'http://172.31.29.58:8080')], contextPath: 'prodapp', war: '**/*.war'
-    }
-        
-}
-=========================================================================================================================
 
---->first stage download source code from github 
--->second stage build the source code
--->third stage deploy code into qa-servers
--->fourth stage first download selenium scripts related to test source code and test the code 
--->fifth stage deploy code into prodservers
-Note:above fifth stage normally we dont have permissions to deploy so in that case we use to give some more information in the fifth stage 
--->provide manager approval msg
-=========================================================================================
-example:
--->manager name is srinivas
--->goto manage jenkins-->manage users-->create a user(srinivas) with neccessary information-->click on create user 
------------
-pipeline syntax:
-sample step: waite for interactive input
-message: waiting for approval from the DM!
--->click on advanced
-allower submitter: srinivas
--->click on generate pipeline syntax
-----------------
+    stage('ContinuousDeployment') {
+        deploy adapters: [tomcat9(
+            credentialsId: 'XXXX',
+            url: 'http://QA-SERVER:8080'
+        )], contextPath: 'testapp', war: '**/*.war'
+    }
+
+    stage('ContinuousTesting') {
+        git 'https://github.com/thej950/FunctionalTesting.git'
+        sh 'java -jar testing.jar'
+    }
+
+    stage('ContinuousDelivery') {
+        input message: 'Need approval from DM!', submitter: 'srinivas'
+        deploy adapters: [tomcat9(
+            credentialsId: 'XXXX',
+            url: 'http://PROD-SERVER:8080'
+        )], contextPath: 'prodapp', war: '**/*.war'
+    }
+}
+```
+
+---
+
+## 🔍 What Each Stage Does (Very Simple)
+
+---
+
+### 🔹 Stage 1: ContinuousDownload
+
+➡ Downloads source code from GitHub
+
+🧠 Like taking raw materials from store
+
+---
+
+### 🔹 Stage 2: ContinuousBuild
+
+➡ Builds the code using Maven
+
+🧠 Like cooking the food
+
+---
+
+### 🔹 Stage 3: ContinuousDeployment (QA)
+
+➡ Deploys app to **QA server**
+
+🧠 Like serving food for tasting
+
+---
+
+### 🔹 Stage 4: ContinuousTesting
+
+➡ Downloads Selenium tests
+➡ Runs automated tests
+
+🧠 Like checking food quality
+
+---
+
+### 🔹 Stage 5: ContinuousDelivery (Production)
+
+➡ Deploys app to **Production server**
+➡ Requires **manager approval**
+
+🧠 Like final approval before selling product
+
+---
+
+## 🔐 Why Approval is Needed for Production?
+
+* Production is critical
+* Only authorized person should approve
+* Prevents mistakes
+
+---
+
+## 👤 Manager Approval Setup (Simple)
+
+1️⃣ Go to **Manage Jenkins**
+2️⃣ Click **Manage Users**
+3️⃣ Create user: `srinivas`
+4️⃣ Give required permissions
+
+---
+
+### ⏳ Approval Step in Pipeline
+
+```groovy
+input message: 'Waiting for approval from the DM!', submitter: 'srinivas'
+```
+
+➡ Pipeline pauses
+➡ Manager clicks **Proceed**
+➡ Deployment continues
+
+---
+
+## 🧠 Analogy for Approval Step
+
+🛑 Red signal
+➡ Manager allows
+➡ Green signal → continue
+
+---
+
+## ✅ One-Line Summary
+
+**Pipeline as Code means writing the full CI-CD process in a Jenkinsfile so Jenkins can build, test, and deploy applications automatically, safely, and repeatedly.** 🚀
+
+# Declarative 
+```bash
+pipeline{
+    agent any
+    stages{
+        stage('ContinuosDowload'){
+            steps{
+                git 'https://github.com/thej950/maven.git'
+            }
+        }
+        stage('ContinuosBuild'){
+            steps{
+                sh 'mvn package'
+            }
+        }
+        stage('ContinuosDeployment'){
+            steps{
+                deploy adapters: [tomcat9(credentialsId: 'e2212b30-c9ba-4219-a177-f93f71c67c2a', path: '', url: 'http://172.31.8.237:8080')], contextPath: 'test', war: '**/*.war'
+            }
+        }
+        stage('ContinuosTesting'){
+            steps{
+                git 'https://github.com/thej950/FunctionalTesting.git'
+                sh 'java -jar /var/lib/jenkins/workspace/declarative-pipeline/testing.jar'
+            }
+        }
+        stage('ContiuosDelivery'){
+            steps{
+                deploy adapters: [tomcat9(credentialsId: 'e2212b30-c9ba-4219-a177-f93f71c67c2a', path: '', url: 'http://172.31.2.80:8080')], contextPath: 'prod', war: '**/*.war'
+            }
+        }
+    }
+}
+```

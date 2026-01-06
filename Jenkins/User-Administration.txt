@@ -1,30 +1,199 @@
-User-Administration ---- Session 5th --1:00 min to 20:00 min
-========================
-1.open manage jenkins-->security-->manage users
-2.create users ravi and rani -->two users created 
-3.imagine ravi for developer job related work
-  imagine rani for tester job related work
-4.by defaults after creating user. user have all permissions
-5.to restrict users specify permission to users based on their roles
-6.now install a pluggin called role-based "authorization strategies" pluggin
-  -click install without resart
-  --after installation pluggin
-7.go to manage jenkings-->security-->configure global security 
-8.observe authentication --- in the box change to role based Strategy -- apply-and save
-9.go to manage jenking-->security-->manage and assign role
-10.open manage role
-11.global role--role to add--enter in the box "employee"
-    --A new role added to in that box give permission make tick mark related employee
-      permissions. --apply-save
-12.item role--role to add -- "developer" in the box
-    pattern "Dev.*" in the box  --apply-save
-13. again role to add in the box "tester" --- pattern "test.*" -- apply-save 
-14. go into assign role
-15. add users/group 
-    user-- ravi--add
-    user-- rani--add
-16. select them as employee
-17.item role--- add ravi and rani
-18. give permissions based on their job
-    ex:- ravi is a developer
-	 rani is a tester   
+# 👥 Jenkins User Administration 
+
+---
+
+## 📌 What is User Administration?
+
+User administration means:
+
+* Creating users
+* Giving permissions
+* Restricting access based on job role
+
+👉 Not everyone should have **admin access**.
+
+---
+
+## 🧠 Real-Life Analogy
+
+🏢 **Office Building**
+
+* Admin → full access
+* Developer → development rooms
+* Tester → testing rooms
+
+Everyone does **only their job**.
+
+---
+
+## 🔧 Step-by-Step User Administration
+
+---
+
+## 🔹 Step 1: Open User Management
+
+1️⃣ Go to **Manage Jenkins**
+2️⃣ Click **Security**
+3️⃣ Click **Manage Users**
+
+---
+
+## 🔹 Step 2: Create Users
+
+Create two users:
+
+* **ravi** → Developer
+* **rani** → Tester
+
+👉 By default, **new users get all permissions** (not safe)
+
+---
+
+## 🔹 Step 3: Why Do We Restrict Permissions?
+
+❌ Developer should not change Jenkins settings
+❌ Tester should not delete pipelines
+
+✔ Everyone should have access **only as needed**
+
+---
+
+## 🔹 Step 4: Install Role-Based Authorization Plugin
+
+1️⃣ Go to **Manage Jenkins**
+2️⃣ Click **Manage Plugins**
+3️⃣ Search for:
+
+```
+Role-Based Authorization Strategy
+```
+
+4️⃣ Click **Install without restart**
+
+🧠 Analogy
+🧰 Installing lock system for office doors
+
+---
+
+## 🔹 Step 5: Enable Role-Based Security
+
+1️⃣ Go to **Manage Jenkins**
+2️⃣ Click **Configure Global Security**
+3️⃣ Under **Authorization**
+
+* Select **Role-Based Strategy**
+  4️⃣ Click **Apply** and **Save**
+
+---
+
+## 🔹 Step 6: Manage Roles
+
+1️⃣ Go to **Manage Jenkins**
+2️⃣ Click **Manage and Assign Roles**
+3️⃣ Click **Manage Roles**
+
+---
+
+## 🔹 Step 7: Create Global Role
+
+### Role Name:
+
+```
+employee
+```
+
+✔ Select basic permissions (read, job view, etc.)
+✔ Click **Apply** and **Save**
+
+🧠 Analogy
+🆔 Office entry card for all employees
+
+---
+
+## 🔹 Step 8: Create Item Roles (Project Level)
+
+---
+
+### 🔸 Developer Role
+
+* Role name: `developer`
+* Pattern:
+
+```
+Dev.*
+```
+
+✔ Permissions related to build, configure jobs
+✔ Apply & Save
+
+---
+
+### 🔸 Tester Role
+
+* Role name: `tester`
+* Pattern:
+
+```
+test.*
+```
+
+✔ Permissions related to read, run tests
+✔ Apply & Save
+
+🧠 Analogy
+🏗 Developer works on Dev projects
+🧪 Tester works on Test projects
+
+---
+
+## 🔹 Step 9: Assign Roles to Users
+
+1️⃣ Go to **Manage and Assign Roles**
+2️⃣ Click **Assign Roles**
+
+---
+
+### 🔸 Global Role Assignment
+
+* Add users:
+
+  * ravi
+  * rani
+* Assign **employee** role
+
+---
+
+### 🔸 Item Role Assignment
+
+* Add:
+
+  * ravi → developer role
+  * rani → tester role
+
+✔ Save changes
+
+---
+
+## 🎯 Final Permission Setup
+
+| User | Global Role | Item Role |
+| ---- | ----------- | --------- |
+| ravi | employee    | developer |
+| rani | employee    | tester    |
+
+---
+
+## ✅ Final Result
+
+✔ Ravi can work only on **Dev jobs**
+✔ Rani can work only on **Test jobs**
+✔ No one has unnecessary admin access
+✔ Jenkins is secure
+
+---
+
+## ✅ One-Line Summary
+
+**Jenkins user administration means creating users and giving permissions based on their job role, just like giving office access only to the required rooms.** 🔐🏢
+
+---
