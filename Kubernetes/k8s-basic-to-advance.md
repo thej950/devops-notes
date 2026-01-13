@@ -357,23 +357,6 @@ kubectl sends your commands to the **Kubernetes API Server**.
 
 ---
 
-#### 📺 Real-Life Analogy (TV Remote)
-
-📺 **Kubernetes Cluster = TV**
-🎮 **kubectl = Remote**
-
-| Remote Button  | kubectl Command |
-| -------------- | --------------- |
-| Power ON       | create          |
-| Change channel | apply           |
-| Check status   | get             |
-| Turn OFF       | delete          |
-
-You press a button → TV responds
-You run kubectl → Cluster responds
-
----
-
 #### 🔁 How kubectl works (Simple Flow)
 
 1️⃣ You type kubectl command
